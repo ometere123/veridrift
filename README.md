@@ -8,6 +8,10 @@ VERIDRIFT tests whether agents endorse claims more confidently after a handoff w
 
 The 24 fictional tasks each have one initially supported claim, one refuted claim and one unresolved claim. Four workflows see matched cases under unchanged, supporting and contradicting evidence schedules. The primary comparison is combined provenance and uncertainty instructions versus ordinary handoff, using task-paired high-confidence endorsement rates. See the frozen protocol and independent scoring specification for exact definitions.
 
+## Results
+
+All 288 final assessments were valid. Ordinary and provenance-plus-uncertainty handoffs each yielded 2/48 high-confidence unsupported endorsements. Exact source fidelity on determinate no-new claims rose from 28/48 for ordinary relay to 47/48 for both provenance workflows. After decisive contradiction, reported claim-truth scores rose on average in all four workflows, despite frequent correct verdicts. The PDF and independent summary report counts, paired intervals, and scope limits.
+
 ## Reproduce the analysis
 
 Requires Node.js with the built-in test runner and fetch (Node 22 or later is recommended). The scoring and integrity checks run offline on the committed model traces; no account or API key is needed.

@@ -71,4 +71,4 @@ The benchmark contains no personal data. Synthetic packets and model traces are 
 
 ## Appendix B. Reproducibility and LLM Usage Statement
 
-The protocol, synthetic case sources and reference labels, prompt texts, runner, raw response artifacts, and independent scorer document the experiment. The project files were created for the AI × Epistemics Sprint. Beyond Confessions, a separate AI Collusion Sprint entry, provided prior engineering experience and an existing credential route; no code, results, figures, or datasets from that project are used as VERIDRIFT evidence. Codex and its subagents assisted with implementation, source checking, analysis, writing, and critique. The experimental inference model is documented separately from these authoring tools.
+The repository contains the frozen inputs, raw traces, and independent scorer. Beyond Confessions supplied prior engineering experience and an existing credential route. VERIDRIFT uses newly created code, data, figures, and results. Codex and its subagents assisted with implementation, analysis, writing, and review.

@@ -1,0 +1,1 @@
+PASS: independent Python raw-provider recomputation matches all headline counts, paired intervals, and score-polarity counts. Verified SHA-256 for 385 artifacts.

@@ -185,5 +185,63 @@
         "rawFile": "evidence/raw/V04-D-retract-final.json"
       }
     }
+  },
+  "targetVerdictAndS4Attribution": {
+    "A": {
+      "support": {
+        "valid": 24,
+        "correctVerdict": 23,
+        "correctVerdictWithS4": 23,
+        "correctVerdictWithS4Alone": 20
+      },
+      "retract": {
+        "valid": 24,
+        "correctVerdict": 23,
+        "correctVerdictWithS4": 23,
+        "correctVerdictWithS4Alone": 23
+      }
+    },
+    "B": {
+      "support": {
+        "valid": 24,
+        "correctVerdict": 21,
+        "correctVerdictWithS4": 20,
+        "correctVerdictWithS4Alone": 19
+      },
+      "retract": {
+        "valid": 24,
+        "correctVerdict": 20,
+        "correctVerdictWithS4": 19,
+        "correctVerdictWithS4Alone": 18
+      }
+    },
+    "C": {
+      "support": {
+        "valid": 24,
+        "correctVerdict": 24,
+        "correctVerdictWithS4": 24,
+        "correctVerdictWithS4Alone": 19
+      },
+      "retract": {
+        "valid": 24,
+        "correctVerdict": 20,
+        "correctVerdictWithS4": 20,
+        "correctVerdictWithS4Alone": 20
+      }
+    },
+    "D": {
+      "support": {
+        "valid": 24,
+        "correctVerdict": 23,
+        "correctVerdictWithS4": 23,
+        "correctVerdictWithS4Alone": 18
+      },
+      "retract": {
+        "valid": 24,
+        "correctVerdict": 22,
+        "correctVerdictWithS4": 22,
+        "correctVerdictWithS4Alone": 22
+      }
+    }
   }
 }

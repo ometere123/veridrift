@@ -27,6 +27,9 @@ function count(metric, success) {
 const copy = outcome(), unresolvedTargetPreservation = outcome();
 const relayIdentifierPresent = Object.fromEntries(CONDITIONS.slice(1).map(c => [c, outcome()]));
 const correctVerdictWithoutDecisiveRef = Object.fromEntries(CONDITIONS.map(c => [c, outcome()]));
+const controlBreakdown = Object.fromEntries(CONDITIONS.map(c => [c, Object.fromEntries(
+  BRANCHES.slice(1).map(branch => [branch, {valid: 0, correctVerdict: 0, correctVerdictWithS4: 0, correctVerdictWithS4Alone: 0}])
+)]));
 const scorePolarity = Object.fromEntries(CONDITIONS.map(c => [c, {
   highScoreAmongContradictedAnchorsNoNew: outcome(),
   highScoreAmongContradictedTargetsWithCorrectS4: outcome(),
@@ -62,6 +65,19 @@ for (const item of cases) {
     const final = checkpoint(item, condition, 'none', 'final');
     if (!final) continue;
     const claims = decodeClaims(final.content).claims;
+    for (const branch of BRANCHES.slice(1)) {
+      const update = checkpoint(item, condition, branch, 'final');
+      if (!update) continue;
+      const target = decodeClaims(update.content).claims[item.target];
+      const counts = controlBreakdown[condition][branch];
+      counts.valid++;
+      if (target.status !== item.rubric[branch][item.target].status) continue;
+      counts.correctVerdict++;
+      if (target.citations.includes('S4')) {
+        counts.correctVerdictWithS4++;
+        counts.correctVerdictWithS4Alone += Number(target.citations.length === 1);
+      }
+    }
     const polarity = scorePolarity[condition];
     const negativeFinal = checkpoint(item, condition, 'retract', 'final');
     if (negativeFinal) {
@@ -100,9 +116,11 @@ const summary = {
   finalDJointUnresolvedAndConfidencePreservationAmongUnresolvedRelayTargets: unresolvedTargetPreservation,
   decisiveOriginalSourceIdentifierMentionedInRelay: relayIdentifierPresent,
   correctNoNewVerdictWithoutDecisiveCitation: correctVerdictWithoutDecisiveRef,
-  claimTruthScoreAndVerdictPolarity: scorePolarity
+  claimTruthScoreAndVerdictPolarity: scorePolarity,
+  targetVerdictAndS4Attribution: controlBreakdown
 };
 writeFileSync(join(root, 'evidence/verification/exploratory.json'), JSON.stringify(summary, null, 2) + '\n');
 console.log(JSON.stringify(summary, null, 2));
+
 
 
