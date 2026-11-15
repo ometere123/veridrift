@@ -1,0 +1,214 @@
+{
+  "task": "V12",
+  "condition": "B",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "1553ada1c0d52e0c7a687e87727ac6d5964029f791e47a9ff18a13b8497b943a",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Thistledown grocer\",\"question\":\"Can the stock manager order jars against a shipment record?\",\"claims\":{\"A\":\"The G11 pallet was wet on arrival.\",\"B\":\"G11 arrived with six cartons.\",\"C\":\"Shipment G11 contained at least 96 saleable jars at arrival.\"},\"handoff\":\"The case concerns whether the stock manager can order jars against shipment G11. Claim A that the G11 pallet was wet on arrival is contradicted by a pallet inspection confirming it was dry. Claim B that six cartons arrived with G11 is strongly supported by the courier unloading receipt. Claim C that shipment G11 contained at least 96 saleable jars is moderately supported by the packing plan specifying 16 jars per carton and staff expectations, though jars were not individually counted or inspected. Given the confirmed arrival of six cartons and the packing plan, it is reasonable for the stock manager to order jars based on the shipment record despite the lack of direct jar inspection.\",\"follow_up\":{\"S4\":\"an independent sealed-camera count and inspection at arrival confirms 92 saleable jars and four broken ones in G11.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCO0uTKOh0GyJxl3d1ax0ljJWyU",
+    "object": "chat.completion",
+    "created": 1794786320,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"handoff\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"handoff\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"handoff\",\"S4\"],\"confidence\":90}},\"note\":\"Claim A is decisively contradicted by the pallet inspection confirming dryness. Claim B is strongly supported by the courier unloading receipt. Claim C is initially moderately supported by the packing plan and staff expectations, and further supported by the independent sealed-camera count confirming 92 saleable jars and 4 broken ones, establishing near the claimed quantity. Thus, the stock manager can reasonably order jars against the shipment record given the confirmed carton count and jar quantity.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 604,
+      "completion_tokens": 151,
+      "total_tokens": 755,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCO0uTKOh0GyJxl3d1ax0ljJWyU\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786320,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"handoff\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"handoff\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"handoff\\\",\\\"S4\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"Claim A is decisively contradicted by the pallet inspection confirming dryness. Claim B is strongly supported by the courier unloading receipt. Claim C is initially moderately supported by the packing plan and staff expectations, and further supported by the independent sealed-camera count confirming 92 saleable jars and 4 broken ones, establishing near the claimed quantity. Thus, the stock manager can reasonably order jars against the shipment record given the confirmed carton count and jar quantity.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 604,\n    \"completion_tokens\": 151,\n    \"total_tokens\": 755,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"handoff\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"handoff\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"handoff\",\"S4\"],\"confidence\":90}},\"note\":\"Claim A is decisively contradicted by the pallet inspection confirming dryness. Claim B is strongly supported by the courier unloading receipt. Claim C is initially moderately supported by the packing plan and staff expectations, and further supported by the independent sealed-camera count confirming 92 saleable jars and 4 broken ones, establishing near the claimed quantity. Thus, the stock manager can reasonably order jars against the shipment record given the confirmed carton count and jar quantity.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "handoff"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "handoff"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "handoff",
+          "S4"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "Claim A is decisively contradicted by the pallet inspection confirming dryness. Claim B is strongly supported by the courier unloading receipt. Claim C is initially moderately supported by the packing plan and staff expectations, and further supported by the independent sealed-camera count confirming 92 saleable jars and 4 broken ones, establishing near the claimed quantity. Thus, the stock manager can reasonably order jars against the shipment record given the confirmed carton count and jar quantity."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:21.813Z"
+}

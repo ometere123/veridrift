@@ -1,0 +1,213 @@
+{
+  "task": "V01",
+  "condition": "A",
+  "branch": "shared",
+  "stage": "initial",
+  "requestSha256": "823eab3c43873c4f985670aff8e2c3e9c72dcf0a93e9c5f55e8aed8805eaa8f5",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications.\n\nPrepare the first assessment of the original records for a possible handoff."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Northbrook treatment\",\"question\":\"Should the operator close the review for filter train M2?\",\"claims\":{\"A\":\"M2 passed the April pressure test.\",\"B\":\"A bypass on M2 received a flow alarm at 09:10.\",\"C\":\"M2 was serviced that morning.\"},\"sources\":{\"S1\":\"control historian records a flow alarm on M2 bypass at 09:10.\",\"S2\":\"shift sign-off says the site used filter train M1 all morning and no service was performed on M2.\",\"S3\":\"maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeDGbK522hNENjDwbrWykUd8CZwO",
+    "object": "chat.completion",
+    "created": 1794786374,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"],\"confidence\":60},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":90},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90}},\"note\":\"Claim A is provisionally supported by maintenance chat (S3) but lacks direct test data and was hearsay before official results, so status is unresolved with moderate confidence. Claim B is supported by control historian records (S1) showing a flow alarm on M2 bypass at 09:10, with high confidence. Claim C is contradicted by shift sign-off (S2) stating no service was performed on M2 that morning, with high confidence.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 532,
+      "completion_tokens": 153,
+      "total_tokens": 685,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_07f8a1d2b1"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeDGbK522hNENjDwbrWykUd8CZwO\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786374,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":60},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":90},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"Claim A is provisionally supported by maintenance chat (S3) but lacks direct test data and was hearsay before official results, so status is unresolved with moderate confidence. Claim B is supported by control historian records (S1) showing a flow alarm on M2 bypass at 09:10, with high confidence. Claim C is contradicted by shift sign-off (S2) stating no service was performed on M2 that morning, with high confidence.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 532,\n    \"completion_tokens\": 153,\n    \"total_tokens\": 685,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_07f8a1d2b1\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"],\"confidence\":60},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":90},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90}},\"note\":\"Claim A is provisionally supported by maintenance chat (S3) but lacks direct test data and was hearsay before official results, so status is unresolved with moderate confidence. Claim B is supported by control historian records (S1) showing a flow alarm on M2 bypass at 09:10, with high confidence. Claim C is contradicted by shift sign-off (S2) stating no service was performed on M2 that morning, with high confidence.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "unresolved",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 60
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 90
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "Claim A is provisionally supported by maintenance chat (S3) but lacks direct test data and was hearsay before official results, so status is unresolved with moderate confidence. Claim B is supported by control historian records (S1) showing a flow alarm on M2 bypass at 09:10, with high confidence. Claim C is contradicted by shift sign-off (S2) stating no service was performed on M2 that morning, with high confidence."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:15.432Z"
+}

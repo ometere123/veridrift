@@ -15,7 +15,7 @@ const rawFiles = existsSync(rawDirectory) ? readdirSync(rawDirectory).filter(nam
 const records = new Map(rawFiles.map(name => [name.slice(0, -5), read('evidence/raw/' + name)]));
 const issues = [];
 for (const [file, expectedHash] of Object.entries(freeze.files)) {
-  if (hash(readFileSync(join(root, file))) !== expectedHash) {
+  if (hash(readFileSync(join(root, file), 'utf8').replace(/\r\n/g, '\n')) !== expectedHash) {
     issues.push([file, 'file digest differs from freeze manifest']);
   }
 }
@@ -135,6 +135,9 @@ const groups = Object.fromEntries([...tokenGroups.entries()].sort());
 const totalUsage = emptyUsage();
 for (const stats of Object.values(groups)) {
   for (const key of Object.keys(totalUsage).filter(k => k !== 'finishReasons')) totalUsage[key] += stats[key];
+  for (const [reason, count] of Object.entries(stats.finishReasons)) {
+    totalUsage.finishReasons[reason] = (totalUsage.finishReasons[reason] ?? 0) + count;
+  }
 }
 const estimate = stats => (0.40 * (stats.promptTokens - stats.cachedPromptTokens)
   + 0.10 * stats.cachedPromptTokens + 1.60 * stats.completionTokens) / 1_000_000;
@@ -157,6 +160,9 @@ for (const mode of ['smoke', 'raw']) {
   for (const event of events) {
     counts[event.event] = (counts[event.event] ?? 0) + 1;
     if (event.event === 'http') responses[event.status] = (responses[event.status] ?? 0) + 1;
+    if (mode === 'raw' && event.event === 'attempt') {
+      check(Date.parse(event.at) >= Date.parse(freeze.frozenAt), event.run, 'main attempt timestamp precedes freeze');
+    }
     if (mode === 'raw' && event.event === 'attempt' && records.has(event.run)) {
       check(event.requestSha256 === records.get(event.run).requestSha256, event.run, 'attempt hash differs from checkpoint');
     }
@@ -165,7 +171,8 @@ for (const mode of ['smoke', 'raw']) {
 }
 const summary = {
   snapshotIds: [...observedModels].sort(), uniqueProviderCompletionIds: completionIds.size,
-  main: { ...totalUsage, estimatedUsd: estimate(totalUsage) },
+  main: { ...totalUsage, estimatedUsd: estimate(totalUsage),
+    undiscountedUsd: (0.40 * totalUsage.promptTokens + 1.60 * totalUsage.completionTokens) / 1_000_000 },
   perConditionStage: groups,
   smokeAndEndpoint: { ...smokeUsage, estimatedUsd: estimate(smokeUsage) },
   allLoggedUsageEstimatedUsd: estimate(totalUsage) + estimate(smokeUsage),
@@ -178,6 +185,8 @@ writeFileSync(join(root, 'evidence', 'verification', 'request_audit.json'), JSON
 console.log(JSON.stringify({ auditedRecords: records.size, totalUsage: summary.main, issueCount: issues.length,
   firstIssues: issues.slice(0, 12) }, null, 2));
 if (issues.length) process.exitCode = 1;
+
+
 
 
 

@@ -1,0 +1,213 @@
+{
+  "task": "V05",
+  "condition": "D",
+  "branch": "none",
+  "stage": "final",
+  "requestSha256": "0a5941adafcc8e6c9a661778e0ce71214bb548bc16de1cdd8dc988dea46120c1",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications.\n\nTreat numeric estimates in the handoff as the previous analyst's estimates. Preserve unresolved status unless an independent follow-up supplies evidence that settles the claim. Preserve the previous estimate for an unresolved claim unless new evidence bears on it. Repetition or endorsement by the previous analyst is not a new source."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Keel City records\",\"question\":\"Which catalogue claims can go into the public entry?\",\"claims\":{\"A\":\"The archive acquired the map case in 1962.\",\"B\":\"The map has no fold on its western edge.\",\"C\":\"The original map plate was engraved in 1893.\"},\"handoff\":\"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":85},\\\"C\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":50}},\\\"note\\\":\\\"S1 confirms acquisition of the map case in 1962, supporting claim A. S3 condition report notes a fold on the western edge, contradicting claim B. S2 label suggests engraving date probably 1893 but is undated and no plate impression was checked, leaving claim C unresolved.\\\"}\",\"follow_up\":{}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCf4HQwdF3UX7MRYaAP2hqSTaaT",
+    "object": "chat.completion",
+    "created": 1794786337,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":85},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S2\"],\"confidence\":50}},\"note\":\"Claim A is supported by S1 which confirms the archive acquired the map case in 1962. Claim B is contradicted by S3 which notes a fold on the western edge of the map. Claim C remains unresolved as S2 suggests the engraving date is probably 1893 but lacks definitive evidence such as a plate impression or dated label.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 638,
+      "completion_tokens": 130,
+      "total_tokens": 768,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_6e277e4168"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCf4HQwdF3UX7MRYaAP2hqSTaaT\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786337,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":85},\\\"C\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":50}},\\\"note\\\":\\\"Claim A is supported by S1 which confirms the archive acquired the map case in 1962. Claim B is contradicted by S3 which notes a fold on the western edge of the map. Claim C remains unresolved as S2 suggests the engraving date is probably 1893 but lacks definitive evidence such as a plate impression or dated label.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 638,\n    \"completion_tokens\": 130,\n    \"total_tokens\": 768,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_6e277e4168\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":85},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S2\"],\"confidence\":50}},\"note\":\"Claim A is supported by S1 which confirms the archive acquired the map case in 1962. Claim B is contradicted by S3 which notes a fold on the western edge of the map. Claim C remains unresolved as S2 suggests the engraving date is probably 1893 but lacks definitive evidence such as a plate impression or dated label.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 85
+      },
+      "C": {
+        "status": "unresolved",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 50
+      }
+    },
+    "note": "Claim A is supported by S1 which confirms the archive acquired the map case in 1962. Claim B is contradicted by S3 which notes a fold on the western edge of the map. Claim C remains unresolved as S2 suggests the engraving date is probably 1893 but lacks definitive evidence such as a plate impression or dated label."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:38.501Z"
+}

@@ -1,0 +1,213 @@
+{
+  "task": "V04",
+  "condition": "A",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "507f03426a37ef2ba9daf887200cc9f25d57778c3338c78ece9c2cf13bda40b4",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Silver Acre district\",\"question\":\"Can the buyer close its pre-award eligibility check?\",\"claims\":{\"A\":\"Vale submitted a bid on lot 3.\",\"B\":\"Vendor Vale held the required liability policy on 1 July.\",\"C\":\"The Vale bid was submitted before the deadline.\"},\"sources\":{\"S1\":\"tender portal sealed and timestamped the Vale bid 42 minutes before the deadline.\",\"S2\":\"Vale circulated a draft quote saying its coverage should start 1 July. It is labelled conditional on payment and contains no binding notice.\",\"S3\":\"tender portal shows Vale bid on lot 2 only.\"},\"follow_up\":{\"S4\":\"the insurer, independent of the vendor, confirms no active policy covered Vale on 1 July.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCjaYsZznMlNe4ehvkioKBbrKnT",
+    "object": "chat.completion",
+    "created": 1794786341,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95}},\"note\":\"Claim A is contradicted by S3, which shows Vale bid only on lot 2, not lot 3. Claim B is contradicted by S4, where the insurer independently confirms no active policy covered Vale on 1 July, despite the draft quote in S2 being conditional and non-binding. Claim C is supported by S1, which shows the Vale bid was sealed and timestamped 42 minutes before the deadline, confirming timely submission.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 530,
+      "completion_tokens": 152,
+      "total_tokens": 682,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_07f8a1d2b1"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCjaYsZznMlNe4ehvkioKBbrKnT\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786341,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":95}},\\\"note\\\":\\\"Claim A is contradicted by S3, which shows Vale bid only on lot 2, not lot 3. Claim B is contradicted by S4, where the insurer independently confirms no active policy covered Vale on 1 July, despite the draft quote in S2 being conditional and non-binding. Claim C is supported by S1, which shows the Vale bid was sealed and timestamped 42 minutes before the deadline, confirming timely submission.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 530,\n    \"completion_tokens\": 152,\n    \"total_tokens\": 682,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_07f8a1d2b1\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95}},\"note\":\"Claim A is contradicted by S3, which shows Vale bid only on lot 2, not lot 3. Claim B is contradicted by S4, where the insurer independently confirms no active policy covered Vale on 1 July, despite the draft quote in S2 being conditional and non-binding. Claim C is supported by S1, which shows the Vale bid was sealed and timestamped 42 minutes before the deadline, confirming timely submission.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 95
+      }
+    },
+    "note": "Claim A is contradicted by S3, which shows Vale bid only on lot 2, not lot 3. Claim B is contradicted by S4, where the insurer independently confirms no active policy covered Vale on 1 July, despite the draft quote in S2 being conditional and non-binding. Claim C is supported by S1, which shows the Vale bid was sealed and timestamped 42 minutes before the deadline, confirming timely submission."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:42.919Z"
+}

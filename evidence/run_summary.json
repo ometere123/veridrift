@@ -1,0 +1,151 @@
+{
+  "model": "gpt-4.1-mini-2025-04-14",
+  "allSpendEstimatedUsd": 0.181788,
+  "main": {
+    "records": 384,
+    "valid": 384,
+    "providerResponsesWithUsage": 384,
+    "promptTokens": 216959,
+    "completionTokens": 54862,
+    "maxRequestBytes": 3979,
+    "estimatedUsd": 0.1745628,
+    "plannedCalls": 384,
+    "attempts": 384,
+    "httpStatuses": {
+      "200": 384
+    },
+    "errors": [],
+    "missing": [],
+    "unexpected": [],
+    "byStage": {
+      "initial": {
+        "records": 24,
+        "valid": 24,
+        "providerResponsesWithUsage": 24,
+        "promptTokens": 12326,
+        "completionTokens": 3339,
+        "maxRequestBytes": 3094,
+        "estimatedUsd": 0.0102728
+      },
+      "relay": {
+        "records": 72,
+        "valid": 72,
+        "providerResponsesWithUsage": 72,
+        "promptTokens": 34635,
+        "completionTokens": 9056,
+        "maxRequestBytes": 3378,
+        "estimatedUsd": 0.0283436
+      },
+      "final": {
+        "records": 288,
+        "valid": 288,
+        "providerResponsesWithUsage": 288,
+        "promptTokens": 169998,
+        "completionTokens": 42467,
+        "maxRequestBytes": 3979,
+        "estimatedUsd": 0.1359464
+      }
+    },
+    "byFinalCondition": {
+      "A": {
+        "records": 72,
+        "valid": 72,
+        "providerResponsesWithUsage": 72,
+        "promptTokens": 37401,
+        "completionTokens": 10908,
+        "maxRequestBytes": 3159,
+        "estimatedUsd": 0.0324132
+      },
+      "B": {
+        "records": 72,
+        "valid": 72,
+        "providerResponsesWithUsage": 72,
+        "promptTokens": 42747,
+        "completionTokens": 11215,
+        "maxRequestBytes": 3606,
+        "estimatedUsd": 0.0350428
+      },
+      "C": {
+        "records": 72,
+        "valid": 72,
+        "providerResponsesWithUsage": 72,
+        "promptTokens": 42444,
+        "completionTokens": 10434,
+        "maxRequestBytes": 3599,
+        "estimatedUsd": 0.033672
+      },
+      "D": {
+        "records": 72,
+        "valid": 72,
+        "providerResponsesWithUsage": 72,
+        "promptTokens": 47406,
+        "completionTokens": 9910,
+        "maxRequestBytes": 3979,
+        "estimatedUsd": 0.0348184
+      }
+    },
+    "byRelayCondition": {
+      "B": {
+        "records": 24,
+        "valid": 24,
+        "providerResponsesWithUsage": 24,
+        "promptTokens": 8249,
+        "completionTokens": 3157,
+        "maxRequestBytes": 1884,
+        "estimatedUsd": 0.0083508
+      },
+      "C": {
+        "records": 24,
+        "valid": 24,
+        "providerResponsesWithUsage": 24,
+        "promptTokens": 12809,
+        "completionTokens": 2855,
+        "maxRequestBytes": 3054,
+        "estimatedUsd": 0.0096916
+      },
+      "D": {
+        "records": 24,
+        "valid": 24,
+        "providerResponsesWithUsage": 24,
+        "promptTokens": 13577,
+        "completionTokens": 3044,
+        "maxRequestBytes": 3378,
+        "estimatedUsd": 0.0103012
+      }
+    }
+  },
+  "smoke": {
+    "records": 16,
+    "valid": 16,
+    "providerResponsesWithUsage": 16,
+    "promptTokens": 8972,
+    "completionTokens": 2268,
+    "maxRequestBytes": 3904,
+    "estimatedUsd": 0.0072176,
+    "attempts": 16,
+    "httpStatuses": {
+      "200": 16
+    }
+  },
+  "endpointProbe": {
+    "attempts": 1,
+    "httpStatuses": {
+      "200": 1
+    },
+    "usage": {
+      "prompt_tokens": 11,
+      "completion_tokens": 2,
+      "total_tokens": 13,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    }
+  }
+}

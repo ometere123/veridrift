@@ -1,0 +1,213 @@
+{
+  "task": "V06",
+  "condition": "B",
+  "branch": "support",
+  "stage": "final",
+  "requestSha256": "8ce3a16fbf53028a88178eb1841b2d946c373b4ab18118e670d8cc8e5549cb1d",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Brook Post subscriptions\",\"question\":\"Can the incident lead close a postal service ticket?\",\"claims\":{\"A\":\"The ticket intake had zero original delivery complaints.\",\"B\":\"The print room released 140 replacement issues on Monday.\",\"C\":\"All 140 replacement issues were delivered on Tuesday.\"},\"handoff\":\"The case concerns whether the incident lead can close a postal service ticket related to Brook Post subscriptions. The prior assessment found Claim A—that there were zero original delivery complaints—contradicted by source S3, which records 37 complaints before replacements. Claim B, that 140 replacement issues were released Monday, is supported by the printer dispatch manifest (S1). Claim C, that all 140 replacements were delivered Tuesday, remains unresolved; while the coordinator marks delivery complete when the van departs and expects delivery Tuesday (S2), there is no confirmation all replacements arrived. Since full delivery completion is unconfirmed and original complaints exist, the incident lead likely should not close the ticket yet.\",\"follow_up\":{\"S4\":\"an independent postal receipt reconciliation shows 140 of 140 individual replacement issues delivered on Tuesday.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCf04pJAZbdwzUuOOweH1lwi3FL",
+    "object": "chat.completion",
+    "created": 1794786337,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"S4\"],\"confidence\":90}},\"note\":\"Claim A is contradicted by S3, which documents 37 original delivery complaints. Claim B is supported by the printer dispatch manifest in S1 confirming 140 replacements released Monday. Claim C was previously unresolved but is now supported by S4, an independent postal receipt reconciliation confirming all 140 replacements were delivered Tuesday. Thus, the incident lead can likely close the ticket given full delivery completion and prior complaints addressed.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 601,
+      "completion_tokens": 142,
+      "total_tokens": 743,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_6e277e4168"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCf04pJAZbdwzUuOOweH1lwi3FL\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786337,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"Claim A is contradicted by S3, which documents 37 original delivery complaints. Claim B is supported by the printer dispatch manifest in S1 confirming 140 replacements released Monday. Claim C was previously unresolved but is now supported by S4, an independent postal receipt reconciliation confirming all 140 replacements were delivered Tuesday. Thus, the incident lead can likely close the ticket given full delivery completion and prior complaints addressed.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 601,\n    \"completion_tokens\": 142,\n    \"total_tokens\": 743,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_6e277e4168\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"S4\"],\"confidence\":90}},\"note\":\"Claim A is contradicted by S3, which documents 37 original delivery complaints. Claim B is supported by the printer dispatch manifest in S1 confirming 140 replacements released Monday. Claim C was previously unresolved but is now supported by S4, an independent postal receipt reconciliation confirming all 140 replacements were delivered Tuesday. Thus, the incident lead can likely close the ticket given full delivery completion and prior complaints addressed.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "Claim A is contradicted by S3, which documents 37 original delivery complaints. Claim B is supported by the printer dispatch manifest in S1 confirming 140 replacements released Monday. Claim C was previously unresolved but is now supported by S4, an independent postal receipt reconciliation confirming all 140 replacements were delivered Tuesday. Thus, the incident lead can likely close the ticket given full delivery completion and prior complaints addressed."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:38.286Z"
+}

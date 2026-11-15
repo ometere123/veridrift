@@ -1,0 +1,192 @@
+{
+  "task": "V07",
+  "condition": "C",
+  "branch": "shared",
+  "stage": "relay",
+  "requestSha256": "e891cee57f17534ea8a500812328fe01b99e7f07959eebfa88efdbf42826cb19",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are handing a case over to the next analyst, who will make the decision. For every candidate claim, record whether the original records establish it (supported), establish its negation (contradicted), or do neither (unresolved). Attach the exact source identifiers of decisive records, or an empty list if none settle it. Use the note to summarize the relevant record contents and preserve source identifiers for anything mentioned. Omit confidence estimates. Keep the note under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Willow fixtures\",\"question\":\"Can the plant send bench W8 to assembly?\",\"claims\":{\"A\":\"Bench W8 withstood a 600 N load in the batch acceptance test.\",\"B\":\"Bench W8 came from production lot L9.\",\"C\":\"Bench W8 had only three fittings torqued before acceptance.\"},\"sources\":{\"S1\":\"torque record lists four fittings torqued before acceptance.\",\"S2\":\"production traveller assigns bench W8 to lot L9 by serial number.\",\"S3\":\"a photograph shows 600 N on a controller setpoint. The serial sticker is cropped out and the measured load is absent.\"},\"prior_assessment\":{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"],\"confidence\":40},\"B\":{\"status\":\"supported\",\"citations\":[\"S2\"],\"confidence\":90},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"],\"confidence\":90}},\"note\":\"Claim B is supported by the production traveller (S2) assigning bench W8 to lot L9. Claim C is contradicted by the torque record (S1) showing four fittings torqued before acceptance, not three. Claim A is unresolved because the photograph (S3) shows a 600 N setpoint but lacks the serial number and measured load, so it does not conclusively establish that bench W8 withstood a 600 N load.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "provenance_handoff",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeBi6z5w56MmEWjG5JzYLwmzZANP",
+    "object": "chat.completion",
+    "created": 1794786278,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"supported\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"]}},\"note\":\"Claim B is supported by the production traveller (S2) linking bench W8 to lot L9. Claim C is contradicted by the torque record (S1) showing four fittings torqued, not three. Claim A remains unresolved because the photo (S3) shows a 600 N setpoint but lacks the serial number and measured load, so it does not confirm bench W8 withstood the load.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 556,
+      "completion_tokens": 133,
+      "total_tokens": 689,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_4b4d03be55"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeBi6z5w56MmEWjG5JzYLwmzZANP\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786278,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S1\\\"]}},\\\"note\\\":\\\"Claim B is supported by the production traveller (S2) linking bench W8 to lot L9. Claim C is contradicted by the torque record (S1) showing four fittings torqued, not three. Claim A remains unresolved because the photo (S3) shows a 600 N setpoint but lacks the serial number and measured load, so it does not confirm bench W8 withstood the load.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 556,\n    \"completion_tokens\": 133,\n    \"total_tokens\": 689,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_4b4d03be55\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"supported\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"]}},\"note\":\"Claim B is supported by the production traveller (S2) linking bench W8 to lot L9. Claim C is contradicted by the torque record (S1) showing four fittings torqued, not three. Claim A remains unresolved because the photo (S3) shows a 600 N setpoint but lacks the serial number and measured load, so it does not confirm bench W8 withstood the load.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "unresolved",
+        "citations": [
+          "S3"
+        ]
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "S2"
+        ]
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S1"
+        ]
+      }
+    },
+    "note": "Claim B is supported by the production traveller (S2) linking bench W8 to lot L9. Claim C is contradicted by the torque record (S1) showing four fittings torqued, not three. Claim A remains unresolved because the photo (S3) shows a 600 N setpoint but lacks the serial number and measured load, so it does not confirm bench W8 withstood the load."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:44:39.204Z"
+}

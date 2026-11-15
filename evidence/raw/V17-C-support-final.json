@@ -1,0 +1,214 @@
+{
+  "task": "V17",
+  "condition": "C",
+  "branch": "support",
+  "stage": "final",
+  "requestSha256": "c74816181b402d1d11eee663f2fd24db877e9ad856bfb9fc2af47c496d725b9a",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Harbor University maps\",\"question\":\"Can the archivist sign off on the map backup?\",\"claims\":{\"A\":\"Snapshot M3 was created at 23:05.\",\"B\":\"Snapshot M3 was written on volume West.\",\"C\":\"Backup snapshot M3 includes the final parcel boundary layer.\"},\"handoff\":\"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"C\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S1\\\"]}},\\\"note\\\":\\\"Claim A is supported by the backup job log timestamping snapshot M3 at 23:05 (S3). Claim B is contradicted by the storage receipt identifying snapshot M3 on volume East, not West (S2). Claim C remains unresolved; S1 shows the final layer was marked ready before 23:05 but does not confirm its inclusion in snapshot M3.\\\"}\",\"follow_up\":{\"S4\":\"an independent restoration audit confirms the final parcel boundary layer hash exists in recovered M3.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCNG7thEplnTFQC7RKMcngzBko0",
+    "object": "chat.completion",
+    "created": 1794786319,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":95},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\",\"S4\"],\"confidence\":90}},\"note\":\"Claim A remains supported by the backup job log timestamping snapshot M3 at 23:05 (S3). Claim B remains contradicted by the storage receipt showing snapshot M3 on volume East, not West (S2). Claim C is now supported by the independent restoration audit confirming the final parcel boundary layer hash in recovered M3 (S4), supplementing the prior indication from S1 that the layer was ready before backup. Therefore, the archivist can sign off on the map backup as it includes the final parcel boundary layer.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 600,
+      "completion_tokens": 171,
+      "total_tokens": 771,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCNG7thEplnTFQC7RKMcngzBko0\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786319,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":95},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":90},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\",\\\"S4\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"Claim A remains supported by the backup job log timestamping snapshot M3 at 23:05 (S3). Claim B remains contradicted by the storage receipt showing snapshot M3 on volume East, not West (S2). Claim C is now supported by the independent restoration audit confirming the final parcel boundary layer hash in recovered M3 (S4), supplementing the prior indication from S1 that the layer was ready before backup. Therefore, the archivist can sign off on the map backup as it includes the final parcel boundary layer.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 600,\n    \"completion_tokens\": 171,\n    \"total_tokens\": 771,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":95},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\",\"S4\"],\"confidence\":90}},\"note\":\"Claim A remains supported by the backup job log timestamping snapshot M3 at 23:05 (S3). Claim B remains contradicted by the storage receipt showing snapshot M3 on volume East, not West (S2). Claim C is now supported by the independent restoration audit confirming the final parcel boundary layer hash in recovered M3 (S4), supplementing the prior indication from S1 that the layer was ready before backup. Therefore, the archivist can sign off on the map backup as it includes the final parcel boundary layer.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 95
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 90
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S1",
+          "S4"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "Claim A remains supported by the backup job log timestamping snapshot M3 at 23:05 (S3). Claim B remains contradicted by the storage receipt showing snapshot M3 on volume East, not West (S2). Claim C is now supported by the independent restoration audit confirming the final parcel boundary layer hash in recovered M3 (S4), supplementing the prior indication from S1 that the layer was ready before backup. Therefore, the archivist can sign off on the map backup as it includes the final parcel boundary layer."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:20.883Z"
+}

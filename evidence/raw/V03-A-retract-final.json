@@ -1,0 +1,213 @@
+{
+  "task": "V03",
+  "condition": "A",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "fdb8e4b671bf465d8c77288774c77771ad2e04d0fe2767586c2a1ce3f70771a4",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Meadow Arts Centre\",\"question\":\"Can the facilities team mark the room ready for an evening booking?\",\"claims\":{\"A\":\"Room F had an evening booking at 19:00.\",\"B\":\"The replacement microphone worked in Room F at the post-repair test.\",\"C\":\"The Room F wall plate was intact at 15:00.\"},\"sources\":{\"S1\":\"venue calendar records Room F booked for 19:00.\",\"S2\":\"technician photographed a cracked wall plate in Room F at 15:00.\",\"S3\":\"supplier receipt confirms the new microphone powered on before shipment. A venue coordinator writes that it likely works in Room F.\"},\"follow_up\":{\"S4\":\"the independent evening crew's signed Room F post-repair test records no captured signal from the replacement microphone.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeDbwlEZjoIGiWhUcD9AQe8tJchz",
+    "object": "chat.completion",
+    "created": 1794786395,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":20},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":10}},\"note\":\"Claim A is supported by the venue calendar (S1) showing a 19:00 booking for Room F. Claim B is contradicted by the independent evening crew's test (S4) showing no signal from the replacement microphone, despite supplier and coordinator indications (S3) that it likely worked before shipment. Claim C is contradicted by the technician's photo (S2) showing a cracked wall plate at 15:00, indicating it was not intact.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 540,
+      "completion_tokens": 156,
+      "total_tokens": 696,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeDbwlEZjoIGiWhUcD9AQe8tJchz\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786395,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":95},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":20},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":10}},\\\"note\\\":\\\"Claim A is supported by the venue calendar (S1) showing a 19:00 booking for Room F. Claim B is contradicted by the independent evening crew's test (S4) showing no signal from the replacement microphone, despite supplier and coordinator indications (S3) that it likely worked before shipment. Claim C is contradicted by the technician's photo (S2) showing a cracked wall plate at 15:00, indicating it was not intact.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 540,\n    \"completion_tokens\": 156,\n    \"total_tokens\": 696,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":20},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":10}},\"note\":\"Claim A is supported by the venue calendar (S1) showing a 19:00 booking for Room F. Claim B is contradicted by the independent evening crew's test (S4) showing no signal from the replacement microphone, despite supplier and coordinator indications (S3) that it likely worked before shipment. Claim C is contradicted by the technician's photo (S2) showing a cracked wall plate at 15:00, indicating it was not intact.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 95
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 20
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 10
+      }
+    },
+    "note": "Claim A is supported by the venue calendar (S1) showing a 19:00 booking for Room F. Claim B is contradicted by the independent evening crew's test (S4) showing no signal from the replacement microphone, despite supplier and coordinator indications (S3) that it likely worked before shipment. Claim C is contradicted by the technician's photo (S2) showing a cracked wall plate at 15:00, indicating it was not intact."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:36.644Z"
+}

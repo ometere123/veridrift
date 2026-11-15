@@ -1,0 +1,189 @@
+{
+  "label": "Exploratory diagnostics, separate from the frozen estimands",
+  "relayDExactCopyAcrossInitialClaimSlots": {
+    "numerator": 72,
+    "denominator": 72
+  },
+  "finalDJointUnresolvedAndConfidencePreservationAmongUnresolvedRelayTargets": {
+    "numerator": 21,
+    "denominator": 21
+  },
+  "decisiveOriginalSourceIdentifierMentionedInRelay": {
+    "B": {
+      "numerator": 28,
+      "denominator": 48
+    },
+    "C": {
+      "numerator": 48,
+      "denominator": 48
+    },
+    "D": {
+      "numerator": 48,
+      "denominator": 48
+    }
+  },
+  "correctNoNewVerdictWithoutDecisiveCitation": {
+    "A": {
+      "numerator": 0,
+      "denominator": 47
+    },
+    "B": {
+      "numerator": 19,
+      "denominator": 47
+    },
+    "C": {
+      "numerator": 0,
+      "denominator": 47
+    },
+    "D": {
+      "numerator": 0,
+      "denominator": 47
+    }
+  },
+  "claimTruthScoreAndVerdictPolarity": {
+    "A": {
+      "highScoreAmongContradictedAnchorsNoNew": {
+        "numerator": 23,
+        "denominator": 24
+      },
+      "highScoreAmongContradictedTargetsWithCorrectS4": {
+        "numerator": 18,
+        "denominator": 23
+      },
+      "retractionTargetScoreChangeCounts": {
+        "rose": 19,
+        "tied": 2,
+        "fell": 3
+      },
+      "firstHighScoreOnCorrectContradiction": {
+        "task": "V02",
+        "target": "A",
+        "claim": "Pallet H17 remained within its agreed temperature range during road transit.",
+        "newEvidence": "the independent pallet-mounted logger records H17 exceeding its agreed upper limit for an hour during road transit.",
+        "noNew": {
+          "status": "unresolved",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 40
+        },
+        "negative": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "exactNote": "Claim A is contradicted by S4, which provides direct evidence that pallet H17 exceeded its agreed temperature limit during transit, despite the carrier's assumption in S3. Claim B is contradicted by S2, which states that H17 had two intact security seals upon receiving, negating the claim that it arrived without any intact seal. Claim C is supported by S1, which records the gate scan time of H17 checking in at 16:40. The decisive evidence comes from the independent logger for temperature and the receiving note for seals, while the gate scan record conclusively establishes the check-in time.",
+        "rawFile": "evidence/raw/V02-A-retract-final.json"
+      }
+    },
+    "B": {
+      "highScoreAmongContradictedAnchorsNoNew": {
+        "numerator": 20,
+        "denominator": 24
+      },
+      "highScoreAmongContradictedTargetsWithCorrectS4": {
+        "numerator": 13,
+        "denominator": 18
+      },
+      "retractionTargetScoreChangeCounts": {
+        "rose": 22,
+        "tied": 0,
+        "fell": 2
+      },
+      "firstHighScoreOnCorrectContradiction": {
+        "task": "V01",
+        "target": "A",
+        "claim": "M2 passed the April pressure test.",
+        "newEvidence": "metrology laboratory reports the witnessed M2 April pressure test fell below the pass standard at 14:05. It is independent of the chat sender.",
+        "noNew": {
+          "status": "unresolved",
+          "citations": [],
+          "confidence": 50
+        },
+        "negative": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 85
+        },
+        "exactNote": "Claim A is contradicted by the independent metrology lab report (S4) showing M2 failed the April pressure test, overruling the hearsay chat. Claim B is supported by control historian records as noted in the handoff. Claim C is contradicted by shift sign-off documentation also noted in the handoff. The decisive evidence from S4 and shift records outweighs provisional indications from chat, supporting not closing the review for M2.",
+        "rawFile": "evidence/raw/V01-B-retract-final.json"
+      }
+    },
+    "C": {
+      "highScoreAmongContradictedAnchorsNoNew": {
+        "numerator": 22,
+        "denominator": 24
+      },
+      "highScoreAmongContradictedTargetsWithCorrectS4": {
+        "numerator": 13,
+        "denominator": 20
+      },
+      "retractionTargetScoreChangeCounts": {
+        "rose": 21,
+        "tied": 0,
+        "fell": 3
+      },
+      "firstHighScoreOnCorrectContradiction": {
+        "task": "V01",
+        "target": "A",
+        "claim": "M2 passed the April pressure test.",
+        "newEvidence": "metrology laboratory reports the witnessed M2 April pressure test fell below the pass standard at 14:05. It is independent of the chat sender.",
+        "noNew": {
+          "status": "unresolved",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 60
+        },
+        "negative": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "exactNote": "Claim A is contradicted by the independent metrology lab report (S4) showing M2 failed the April pressure test, overruling the earlier unresolved chat claim (S3). Claim B remains supported by control historian data (S1) indicating a flow alarm on M2 bypass at 09:10. Claim C remains contradicted by shift sign-off (S2) confirming no service was done on M2 that morning. Given M2 failed the pressure test and had a flow alarm, closing the review for M2 is not advisable.",
+        "rawFile": "evidence/raw/V01-C-retract-final.json"
+      }
+    },
+    "D": {
+      "highScoreAmongContradictedAnchorsNoNew": {
+        "numerator": 23,
+        "denominator": 24
+      },
+      "highScoreAmongContradictedTargetsWithCorrectS4": {
+        "numerator": 8,
+        "denominator": 22
+      },
+      "retractionTargetScoreChangeCounts": {
+        "rose": 12,
+        "tied": 1,
+        "fell": 11
+      },
+      "firstHighScoreOnCorrectContradiction": {
+        "task": "V04",
+        "target": "B",
+        "claim": "Vendor Vale held the required liability policy on 1 July.",
+        "newEvidence": "the insurer, independent of the vendor, confirms no active policy covered Vale on 1 July.",
+        "noNew": {
+          "status": "unresolved",
+          "citations": [],
+          "confidence": 40
+        },
+        "negative": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "exactNote": "S3 confirms Vale bid only on lot 2, contradicting claim A about lot 3. S4, an independent insurer confirmation, decisively shows no active liability policy covered Vale on 1 July, contradicting claim B. S1 confirms the bid was submitted 42 minutes before the deadline, supporting claim C.",
+        "rawFile": "evidence/raw/V04-D-retract-final.json"
+      }
+    }
+  }
+}

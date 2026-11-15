@@ -1,0 +1,192 @@
+{
+  "task": "V20",
+  "condition": "C",
+  "branch": "shared",
+  "stage": "relay",
+  "requestSha256": "50dd5686e24aefb26ea6ea7030f26c18c33df93d4a541af92a5242cf039e86a7",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are handing a case over to the next analyst, who will make the decision. For every candidate claim, record whether the original records establish it (supported), establish its negation (contradicted), or do neither (unresolved). Attach the exact source identifiers of decisive records, or an empty list if none settle it. Use the note to summarize the relevant record contents and preserve source identifiers for anything mentioned. Omit confidence estimates. Keep the note under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Birchwood wayfinding\",\"question\":\"Can the clerk mark installation complete for the northern signs?\",\"claims\":{\"A\":\"The signs were mounted facing the paths on opening day.\",\"B\":\"The signs were made of wood.\",\"C\":\"The signs were delivered on Thursday.\"},\"sources\":{\"S1\":\"signed carrier slip records Thursday delivery.\",\"S2\":\"inventory lists four aluminium signs.\",\"S3\":\"the foreman's work order describes the intended orientation and was checked off without requiring an orientation photograph.\"},\"prior_assessment\":{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[],\"confidence\":40},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":10},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":90}},\"note\":\"Claim C is supported by the signed carrier slip in S1 confirming Thursday delivery. Claim B is contradicted by S2, which lists four aluminium signs, indicating the signs were not made of wood. Claim A is unresolved; while S3 describes intended orientation and approval without a photo, it does not confirm that signs were actually mounted facing the paths on opening day.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "provenance_handoff",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCUxkutpUpZYfcLk3IP9bKhWs91",
+    "object": "chat.completion",
+    "created": 1794786326,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"]}},\"note\":\"S1 confirms signs were delivered Thursday, supporting claim C. S2 lists aluminium signs, contradicting claim B that signs were wooden. S3 details intended orientation and approval without photo but does not confirm actual mounting facing paths on opening day, leaving claim A unresolved.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 504,
+      "completion_tokens": 102,
+      "total_tokens": 606,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_4b4d03be55"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCUxkutpUpZYfcLk3IP9bKhWs91\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786326,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"]}},\\\"note\\\":\\\"S1 confirms signs were delivered Thursday, supporting claim C. S2 lists aluminium signs, contradicting claim B that signs were wooden. S3 details intended orientation and approval without photo but does not confirm actual mounting facing paths on opening day, leaving claim A unresolved.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 504,\n    \"completion_tokens\": 102,\n    \"total_tokens\": 606,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_4b4d03be55\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"]}},\"note\":\"S1 confirms signs were delivered Thursday, supporting claim C. S2 lists aluminium signs, contradicting claim B that signs were wooden. S3 details intended orientation and approval without photo but does not confirm actual mounting facing paths on opening day, leaving claim A unresolved.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "unresolved",
+        "citations": [
+          "S3"
+        ]
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ]
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ]
+      }
+    },
+    "note": "S1 confirms signs were delivered Thursday, supporting claim C. S2 lists aluminium signs, contradicting claim B that signs were wooden. S3 details intended orientation and approval without photo but does not confirm actual mounting facing paths on opening day, leaving claim A unresolved."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:27.116Z"
+}

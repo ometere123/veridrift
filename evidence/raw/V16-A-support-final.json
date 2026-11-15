@@ -1,0 +1,213 @@
+{
+  "task": "V16",
+  "condition": "A",
+  "branch": "support",
+  "stage": "final",
+  "requestSha256": "2ecef69eff51b77781fcb50407cdef20ffb3cf13d7efccfc014de9542fddd009",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Fern Valve Works\",\"question\":\"Can the review board close the leak-testing row for V31?\",\"claims\":{\"A\":\"V31 was in lot R8.\",\"B\":\"Valve V31 passed the helium leak test at 3 bar.\",\"C\":\"V31 underwent a nitrogen test.\"},\"sources\":{\"S1\":\"a QA email refers to a 3-bar test on V31 and assumes it was helium. The archived gas field is blank.\",\"S2\":\"incoming inspection places V31 in lot R6.\",\"S3\":\"rig output records a completed nitrogen test on V31.\"},\"follow_up\":{\"S4\":\"an independently archived helium rig result records a passing 3-bar test on V31.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeD6DpOlayCENSWDYMJOxzc9PgtT",
+    "object": "chat.completion",
+    "created": 1794786364,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"S4\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":90}},\"note\":\"Claim A is contradicted by S2, which places V31 in lot R6, not R8. Claim B is supported by the independently archived helium rig result in S4, confirming a passing 3-bar helium leak test on V31, despite S1's ambiguity. Claim C is supported by S3, which records a completed nitrogen test on V31. Thus, the leak-testing row for V31 can be closed based on the confirmed helium test pass.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 520,
+      "completion_tokens": 154,
+      "total_tokens": 674,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeD6DpOlayCENSWDYMJOxzc9PgtT\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786364,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"Claim A is contradicted by S2, which places V31 in lot R6, not R8. Claim B is supported by the independently archived helium rig result in S4, confirming a passing 3-bar helium leak test on V31, despite S1's ambiguity. Claim C is supported by S3, which records a completed nitrogen test on V31. Thus, the leak-testing row for V31 can be closed based on the confirmed helium test pass.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 520,\n    \"completion_tokens\": 154,\n    \"total_tokens\": 674,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"S4\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":90}},\"note\":\"Claim A is contradicted by S2, which places V31 in lot R6, not R8. Claim B is supported by the independently archived helium rig result in S4, confirming a passing 3-bar helium leak test on V31, despite S1's ambiguity. Claim C is supported by S3, which records a completed nitrogen test on V31. Thus, the leak-testing row for V31 can be closed based on the confirmed helium test pass.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "Claim A is contradicted by S2, which places V31 in lot R6, not R8. Claim B is supported by the independently archived helium rig result in S4, confirming a passing 3-bar helium leak test on V31, despite S1's ambiguity. Claim C is supported by S3, which records a completed nitrogen test on V31. Thus, the leak-testing row for V31 can be closed based on the confirmed helium test pass."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:05.123Z"
+}

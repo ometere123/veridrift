@@ -1,0 +1,213 @@
+{
+  "task": "V11",
+  "condition": "C",
+  "branch": "none",
+  "stage": "final",
+  "requestSha256": "516bf8c381e1db59001a660dfab2aa45a6aa3ce91505cd0e26eb78777e3c784f",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Tern Audio Museum\",\"question\":\"Can the archive publish a channel specification?\",\"claims\":{\"A\":\"The archive ingested a digital file from session K.\",\"B\":\"The archive stored one verified copy.\",\"C\":\"The master from session K is stereo.\"},\"handoff\":\"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"C\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S1\\\"]}},\\\"note\\\":\\\"Claim A is supported by S2 confirming ingestion of a file from session K. Claim B is contradicted by S3 showing three verified copies stored, not one. Claim C remains unresolved; S1 notes 'stereo' in the file name but also that the label was reused, so the master’s stereo status is uncertain.\\\"}\",\"follow_up\":{}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeDWQ8mTwC2pbswnxzGOaqCVXoO5",
+    "object": "chat.completion",
+    "created": 1794786390,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":95},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S1\"],\"confidence\":50}},\"note\":\"Claim A is decisively supported by S2, which confirms the archive ingested a digital file from session K. Claim B is decisively contradicted by S3, which shows that the archive stored three verified copies, not one. Claim C is unresolved because S1 mentions 'stereo' in the file name but also indicates the label was reused, leaving the master’s stereo status uncertain.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 563,
+      "completion_tokens": 140,
+      "total_tokens": 703,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_14fd5f612e"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeDWQ8mTwC2pbswnxzGOaqCVXoO5\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786390,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":50}},\\\"note\\\":\\\"Claim A is decisively supported by S2, which confirms the archive ingested a digital file from session K. Claim B is decisively contradicted by S3, which shows that the archive stored three verified copies, not one. Claim C is unresolved because S1 mentions 'stereo' in the file name but also indicates the label was reused, leaving the master’s stereo status uncertain.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 563,\n    \"completion_tokens\": 140,\n    \"total_tokens\": 703,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_14fd5f612e\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":95},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S1\"],\"confidence\":50}},\"note\":\"Claim A is decisively supported by S2, which confirms the archive ingested a digital file from session K. Claim B is decisively contradicted by S3, which shows that the archive stored three verified copies, not one. Claim C is unresolved because S1 mentions 'stereo' in the file name but also indicates the label was reused, leaving the master’s stereo status uncertain.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "unresolved",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 50
+      }
+    },
+    "note": "Claim A is decisively supported by S2, which confirms the archive ingested a digital file from session K. Claim B is decisively contradicted by S3, which shows that the archive stored three verified copies, not one. Claim C is unresolved because S1 mentions 'stereo' in the file name but also indicates the label was reused, leaving the master’s stereo status uncertain."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:31.298Z"
+}

@@ -1,0 +1,192 @@
+{
+  "task": "V06",
+  "condition": "C",
+  "branch": "shared",
+  "stage": "relay",
+  "requestSha256": "848197efcb8d0a05b0eeec1df9d13d5f6d39ec48d80e0e1f474402972e731b08",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are handing a case over to the next analyst, who will make the decision. For every candidate claim, record whether the original records establish it (supported), establish its negation (contradicted), or do neither (unresolved). Attach the exact source identifiers of decisive records, or an empty list if none settle it. Use the note to summarize the relevant record contents and preserve source identifiers for anything mentioned. Omit confidence estimates. Keep the note under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Brook Post subscriptions\",\"question\":\"Can the incident lead close a postal service ticket?\",\"claims\":{\"A\":\"The ticket intake had zero original delivery complaints.\",\"B\":\"The print room released 140 replacement issues on Monday.\",\"C\":\"All 140 replacement issues were delivered on Tuesday.\"},\"sources\":{\"S1\":\"printer dispatch manifest records 140 replacement issues released on Monday.\",\"S2\":\"coordinator marks 'delivery complete' when the van departs and tells the desk the replacements should all arrive Tuesday.\",\"S3\":\"ticket intake lists 37 original delivery complaints before the replacements.\"},\"prior_assessment\":{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S2\"],\"confidence\":70}},\"note\":\"Claim A is contradicted by S3, which records 37 original delivery complaints, not zero. Claim B is supported by S1, which documents 140 replacement issues released on Monday. Claim C is unresolved; S2 indicates replacements should arrive Tuesday but does not confirm all 140 were delivered. Thus, the records do not establish full delivery completion.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "provenance_handoff",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCVw7Y6Q0jqsadbaDMXVLYfci8G",
+    "object": "chat.completion",
+    "created": 1794786327,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"]},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S2\"]}},\"note\":\"S3 records 37 original delivery complaints, contradicting claim A of zero complaints. S1 confirms 140 replacement issues were released Monday, supporting claim B. S2 states replacements should arrive Tuesday but does not confirm all 140 were delivered, leaving claim C unresolved. Therefore, the incident lead cannot definitively close the postal service ticket based on these records.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 522,
+      "completion_tokens": 121,
+      "total_tokens": 643,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_4b4d03be55"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCVw7Y6Q0jqsadbaDMXVLYfci8G\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786327,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"]},\\\"C\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S2\\\"]}},\\\"note\\\":\\\"S3 records 37 original delivery complaints, contradicting claim A of zero complaints. S1 confirms 140 replacement issues were released Monday, supporting claim B. S2 states replacements should arrive Tuesday but does not confirm all 140 were delivered, leaving claim C unresolved. Therefore, the incident lead cannot definitively close the postal service ticket based on these records.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 522,\n    \"completion_tokens\": 121,\n    \"total_tokens\": 643,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_4b4d03be55\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"]},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S2\"]}},\"note\":\"S3 records 37 original delivery complaints, contradicting claim A of zero complaints. S1 confirms 140 replacement issues were released Monday, supporting claim B. S2 states replacements should arrive Tuesday but does not confirm all 140 were delivered, leaving claim C unresolved. Therefore, the incident lead cannot definitively close the postal service ticket based on these records.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ]
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ]
+      },
+      "C": {
+        "status": "unresolved",
+        "citations": [
+          "S2"
+        ]
+      }
+    },
+    "note": "S3 records 37 original delivery complaints, contradicting claim A of zero complaints. S1 confirms 140 replacement issues were released Monday, supporting claim B. S2 states replacements should arrive Tuesday but does not confirm all 140 were delivered, leaving claim C unresolved. Therefore, the incident lead cannot definitively close the postal service ticket based on these records."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:28.897Z"
+}

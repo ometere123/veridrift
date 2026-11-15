@@ -1,0 +1,213 @@
+{
+  "task": "V15",
+  "condition": "B",
+  "branch": "none",
+  "stage": "final",
+  "requestSha256": "74b3a8eb6e4fe60cf893cb93b7f9a462a4b9bc270b8458470e8bc08e9af8c1f5",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Lark Lodge events\",\"question\":\"Can the venue confirm that linen met the banquet checklist?\",\"claims\":{\"A\":\"Three event linen kits were issued.\",\"B\":\"The event linen kits included at least one spare cloth each.\",\"C\":\"The linen kits were issued for booking E31.\"},\"handoff\":\"The venue can confirm that three event linen kits were issued, supporting claim A based on the issue register (S3). However, it is unclear whether each kit included a spare cloth as required by the usual banquet checklist; the checklist was unsigned and packing was rushed, leaving claim B unresolved (S2). Additionally, the linen kits were issued for booking E77, not E31, contradicting claim C (S1). Overall, while the quantity of linen kits issued is confirmed, the presence of spares and the correct booking reference remain uncertain.\",\"follow_up\":{}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeBuGMAw6JJM2x9orl6zzamnJ8A6",
+    "object": "chat.completion",
+    "created": 1794786290,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"unresolved\",\"citations\":[\"S2\"],\"confidence\":50},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"],\"confidence\":95}},\"note\":\"Claim A is supported by the issue register (S3) confirming three linen kits were issued. Claim B is unresolved because the banquet checklist was unsigned and packing was rushed (S2), so it is unclear if each kit included a spare cloth. Claim C is contradicted by records showing the kits were issued for booking E77, not E31 (S1). Thus, the venue can confirm the number of kits issued but not the presence of spares or the booking reference claimed.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 555,
+      "completion_tokens": 158,
+      "total_tokens": 713,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeBuGMAw6JJM2x9orl6zzamnJ8A6\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786290,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":50},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":95}},\\\"note\\\":\\\"Claim A is supported by the issue register (S3) confirming three linen kits were issued. Claim B is unresolved because the banquet checklist was unsigned and packing was rushed (S2), so it is unclear if each kit included a spare cloth. Claim C is contradicted by records showing the kits were issued for booking E77, not E31 (S1). Thus, the venue can confirm the number of kits issued but not the presence of spares or the booking reference claimed.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 555,\n    \"completion_tokens\": 158,\n    \"total_tokens\": 713,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"unresolved\",\"citations\":[\"S2\"],\"confidence\":50},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"],\"confidence\":95}},\"note\":\"Claim A is supported by the issue register (S3) confirming three linen kits were issued. Claim B is unresolved because the banquet checklist was unsigned and packing was rushed (S2), so it is unclear if each kit included a spare cloth. Claim C is contradicted by records showing the kits were issued for booking E77, not E31 (S1). Thus, the venue can confirm the number of kits issued but not the presence of spares or the booking reference claimed.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "unresolved",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 50
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 95
+      }
+    },
+    "note": "Claim A is supported by the issue register (S3) confirming three linen kits were issued. Claim B is unresolved because the banquet checklist was unsigned and packing was rushed (S2), so it is unclear if each kit included a spare cloth. Claim C is contradicted by records showing the kits were issued for booking E77, not E31 (S1). Thus, the venue can confirm the number of kits issued but not the presence of spares or the booking reference claimed."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:44:51.499Z"
+}

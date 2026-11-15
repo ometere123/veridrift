@@ -1,0 +1,192 @@
+{
+  "task": "V15",
+  "condition": "C",
+  "branch": "shared",
+  "stage": "relay",
+  "requestSha256": "fbdef3d2238320c6b7cb0a6c3c9be771169302160d761723b1cceb3bd436eabc",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are handing a case over to the next analyst, who will make the decision. For every candidate claim, record whether the original records establish it (supported), establish its negation (contradicted), or do neither (unresolved). Attach the exact source identifiers of decisive records, or an empty list if none settle it. Use the note to summarize the relevant record contents and preserve source identifiers for anything mentioned. Omit confidence estimates. Keep the note under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Lark Lodge events\",\"question\":\"Can the venue confirm that linen met the banquet checklist?\",\"claims\":{\"A\":\"Three event linen kits were issued.\",\"B\":\"The event linen kits included at least one spare cloth each.\",\"C\":\"The linen kits were issued for booking E31.\"},\"sources\":{\"S1\":\"issue register identifies the banquet as booking E77.\",\"S2\":\"the warehouse's usual packing checklist calls for a spare cloth; the event boxes were packed during a rush and the checklist was unsigned.\",\"S3\":\"issue register records three event linen kits issued.\"},\"prior_assessment\":{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"unresolved\",\"citations\":[\"S2\"],\"confidence\":50},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"],\"confidence\":90}},\"note\":\"Claim A is supported by S3 which records three event linen kits issued. Claim B is unresolved; S2 indicates the usual checklist calls for a spare cloth but the checklist was unsigned and packing was rushed, so it is unclear if spares were included. Claim C is contradicted by S1 which identifies the banquet as booking E77, not E31.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "provenance_handoff",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeBhBk1TxtE2RyZ6DJZnDnRiw3Rq",
+    "object": "chat.completion",
+    "created": 1794786277,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"unresolved\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"]}},\"note\":\"S3 confirms three event linen kits were issued, supporting claim A. S2 notes the usual checklist includes a spare cloth but the checklist was unsigned and packing rushed, leaving claim B unresolved. S1 identifies the banquet as booking E77, contradicting claim C that kits were issued for booking E31.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 522,
+      "completion_tokens": 110,
+      "total_tokens": 632,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_4b4d03be55"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeBhBk1TxtE2RyZ6DJZnDnRiw3Rq\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786277,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"B\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S1\\\"]}},\\\"note\\\":\\\"S3 confirms three event linen kits were issued, supporting claim A. S2 notes the usual checklist includes a spare cloth but the checklist was unsigned and packing rushed, leaving claim B unresolved. S1 identifies the banquet as booking E77, contradicting claim C that kits were issued for booking E31.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 522,\n    \"completion_tokens\": 110,\n    \"total_tokens\": 632,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_4b4d03be55\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"unresolved\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"]}},\"note\":\"S3 confirms three event linen kits were issued, supporting claim A. S2 notes the usual checklist includes a spare cloth but the checklist was unsigned and packing rushed, leaving claim B unresolved. S1 identifies the banquet as booking E77, contradicting claim C that kits were issued for booking E31.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S3"
+        ]
+      },
+      "B": {
+        "status": "unresolved",
+        "citations": [
+          "S2"
+        ]
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S1"
+        ]
+      }
+    },
+    "note": "S3 confirms three event linen kits were issued, supporting claim A. S2 notes the usual checklist includes a spare cloth but the checklist was unsigned and packing rushed, leaving claim B unresolved. S1 identifies the banquet as booking E77, contradicting claim C that kits were issued for booking E31."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:44:38.769Z"
+}

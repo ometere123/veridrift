@@ -1,0 +1,213 @@
+{
+  "task": "V24",
+  "condition": "A",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "b30bd05d2ba3e94c691ff7477198c384f8038d66951d3f56f8638a30d8c726c4",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Frost Lane workshops\",\"question\":\"Can inventory certify the dispatch packing bill?\",\"claims\":{\"A\":\"Box J weighed 3.2 kg with packaging.\",\"B\":\"Box J was sent to the second workshop.\",\"C\":\"Box J contained the full replacement hinge kit at dispatch.\"},\"sources\":{\"S1\":\"dispatch registry identifies the second workshop as the recipient of J.\",\"S2\":\"a matching kit typically weighs 1.4 kg when packed. Miscellaneous loose hardware was also pooled on the packing table.\",\"S3\":\"dispatch registry records J weighed 1.4 kg with packaging.\"},\"follow_up\":{\"S4\":\"independent opening inventory confirms two specified hinge parts missing from J, with dispatch seal unbroken on arrival.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeBvFiTIYKQDtHrmZTmHGwaerLzr",
+    "object": "chat.completion",
+    "created": 1794786291,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":85}},\"note\":\"Claim A is contradicted by S3, which records Box J's weight as 1.4 kg, not 3.2 kg. Claim B is supported by S1, which identifies the second workshop as the recipient of Box J. Claim C is contradicted by S4, which confirms two hinge parts were missing from Box J despite the dispatch seal being unbroken, indicating the full replacement hinge kit was not present at dispatch. S2 provides context on typical kit weight and loose hardware but does not decisively establish any claim.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 526,
+      "completion_tokens": 170,
+      "total_tokens": 696,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_14fd5f612e"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeBvFiTIYKQDtHrmZTmHGwaerLzr\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786291,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":85}},\\\"note\\\":\\\"Claim A is contradicted by S3, which records Box J's weight as 1.4 kg, not 3.2 kg. Claim B is supported by S1, which identifies the second workshop as the recipient of Box J. Claim C is contradicted by S4, which confirms two hinge parts were missing from Box J despite the dispatch seal being unbroken, indicating the full replacement hinge kit was not present at dispatch. S2 provides context on typical kit weight and loose hardware but does not decisively establish any claim.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 526,\n    \"completion_tokens\": 170,\n    \"total_tokens\": 696,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_14fd5f612e\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":90},\"B\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":85}},\"note\":\"Claim A is contradicted by S3, which records Box J's weight as 1.4 kg, not 3.2 kg. Claim B is supported by S1, which identifies the second workshop as the recipient of Box J. Claim C is contradicted by S4, which confirms two hinge parts were missing from Box J despite the dispatch seal being unbroken, indicating the full replacement hinge kit was not present at dispatch. S2 provides context on typical kit weight and loose hardware but does not decisively establish any claim.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 85
+      }
+    },
+    "note": "Claim A is contradicted by S3, which records Box J's weight as 1.4 kg, not 3.2 kg. Claim B is supported by S1, which identifies the second workshop as the recipient of Box J. Claim C is contradicted by S4, which confirms two hinge parts were missing from Box J despite the dispatch seal being unbroken, indicating the full replacement hinge kit was not present at dispatch. S2 provides context on typical kit weight and loose hardware but does not decisively establish any claim."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:44:53.420Z"
+}

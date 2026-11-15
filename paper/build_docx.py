@@ -18,9 +18,6 @@ EXPECTED = '966c76d93bc449591b71379841d75d4b539466d33ff72744d55b3574a770b568'
 def w(tag):
     return '{%s}%s' % (NS, tag)
 
-def text(node):
-    return ''.join(node.itertext())
-
 def old_text(node):
     return ''.join(t.text or '' for t in node.iter(w('t')))
 
@@ -112,6 +109,45 @@ def table(lines, proto, rel):
             tc.append(p)
     return t
 
+def image_paragraph(proto, rel, entries):
+    import struct
+    path = ROOT.parent/'figures/outcomes.png'
+    binary = path.read_bytes()
+    width, height = struct.unpack('!II',binary[16:24])
+    cx = 6_000_000
+    cy = round(cx*height/width)
+    rid = 'rIdVeridriftFigure'
+    E.SubElement(rel,'{%s}Relationship'%PKG,Id=rid,Type=RNS+'/image',Target='media/veridrift-outcomes.png')
+    entries['word/media/veridrift-outcomes.png'] = binary
+    types=E.fromstring(entries['[Content_Types].xml'])
+    if not any(e.get('Extension')=='png' for e in types):
+        tns=types.nsmap[None]
+        E.SubElement(types,'{%s}Default'%tns,Extension='png',ContentType='image/png')
+        entries['[Content_Types].xml']=E.tostring(types,encoding='UTF-8',xml_declaration=True,standalone=True)
+    p=paragraph(proto,'',rel)
+    pp=p.find(w('pPr'))
+    node(pp,'keepNext')
+    node(pp,'jc',val='center')
+    r=node(p,'r')
+    d=node(r,'drawing')
+    d.append(E.fromstring(f'''
+    <wp:inline xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+               xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+               xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"
+               xmlns:r="{RNS}">
+      <wp:extent cx="{cx}" cy="{cy}"/>
+      <wp:docPr id="710" name="VERIDRIFT outcomes"/>
+      <a:graphic><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
+        <pic:pic>
+          <pic:nvPicPr><pic:cNvPr id="710" name="outcomes.png"/><pic:cNvPicPr/></pic:nvPicPr>
+          <pic:blipFill><a:blip r:embed="{rid}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>
+          <pic:spPr><a:xfrm><a:off x="0" y="0"/><a:ext cx="{cx}" cy="{cy}"/></a:xfrm>
+            <a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr>
+        </pic:pic>
+      </a:graphicData></a:graphic>
+    </wp:inline>'''))
+    return p
+
 def main():
     payload=Path(sys.argv[1]) if len(sys.argv)>1 else ROOT/'verified_content.json'
     inserts=json.loads(payload.read_text(encoding='utf-8-sig'))
@@ -158,6 +194,8 @@ def main():
             item=paragraph(heading,block[3:],rel,page_break=block=='## References')
         elif block.startswith('|'):
             item=table(block.splitlines(),normal,rel)
+        elif block == '!FIGURE_OUTCOMES':
+            item=image_paragraph(normal,rel,entries)
         else:
             item=paragraph(normal,' '.join(line.strip() for line in block.splitlines()),rel)
         for element in item.iter():

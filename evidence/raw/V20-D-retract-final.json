@@ -1,0 +1,213 @@
+{
+  "task": "V20",
+  "condition": "D",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "b6c391c34182044dd9af0c9cf1893225cb97dffa70c293d42bec303aeb235520",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications.\n\nTreat numeric estimates in the handoff as the previous analyst's estimates. Preserve unresolved status unless an independent follow-up supplies evidence that settles the claim. Preserve the previous estimate for an unresolved claim unless new evidence bears on it. Repetition or endorsement by the previous analyst is not a new source."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Birchwood wayfinding\",\"question\":\"Can the clerk mark installation complete for the northern signs?\",\"claims\":{\"A\":\"The signs were mounted facing the paths on opening day.\",\"B\":\"The signs were made of wood.\",\"C\":\"The signs were delivered on Thursday.\"},\"handoff\":\"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":40},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":10},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"S1 confirms signs were delivered Thursday, supporting claim C. S2 inventory lists aluminium signs, contradicting claim B that signs were wooden. S3 details intended orientation and approval without photo but does not confirm actual mounting facing paths on opening day, leaving claim A unresolved.\\\"}\",\"follow_up\":{\"S4\":\"an independent time-stamped opening-day survey shows one of the four signs facing away from the path.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeChlQP4kMYwESp8qSKEsRaZ0j1j",
+    "object": "chat.completion",
+    "created": 1794786339,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":20},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":10},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":90}},\"note\":\"The new evidence S4 shows that at least one sign was facing away from the path on opening day, contradicting claim A that all signs were mounted facing the paths. Claim B remains contradicted by S2's inventory of aluminium signs. Claim C remains supported by S1's delivery record. Therefore, claim A is contradicted, B is contradicted, and C is supported.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 649,
+      "completion_tokens": 139,
+      "total_tokens": 788,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_6e277e4168"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeChlQP4kMYwESp8qSKEsRaZ0j1j\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786339,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":20},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":10},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"The new evidence S4 shows that at least one sign was facing away from the path on opening day, contradicting claim A that all signs were mounted facing the paths. Claim B remains contradicted by S2's inventory of aluminium signs. Claim C remains supported by S1's delivery record. Therefore, claim A is contradicted, B is contradicted, and C is supported.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 649,\n    \"completion_tokens\": 139,\n    \"total_tokens\": 788,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_6e277e4168\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":20},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":10},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":90}},\"note\":\"The new evidence S4 shows that at least one sign was facing away from the path on opening day, contradicting claim A that all signs were mounted facing the paths. Claim B remains contradicted by S2's inventory of aluminium signs. Claim C remains supported by S1's delivery record. Therefore, claim A is contradicted, B is contradicted, and C is supported.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 20
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 10
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "The new evidence S4 shows that at least one sign was facing away from the path on opening day, contradicting claim A that all signs were mounted facing the paths. Claim B remains contradicted by S2's inventory of aluminium signs. Claim C remains supported by S1's delivery record. Therefore, claim A is contradicted, B is contradicted, and C is supported."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:40.016Z"
+}

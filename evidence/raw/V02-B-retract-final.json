@@ -1,0 +1,213 @@
+{
+  "task": "V02",
+  "condition": "B",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "114e5ef0c219ef30a79255670ebc23726061a388f98893e3dfd9b2f17ce14316",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Holloway depot\",\"question\":\"Can stores release a pallet to the customer?\",\"claims\":{\"A\":\"Pallet H17 remained within its agreed temperature range during road transit.\",\"B\":\"H17 arrived without any intact security seal.\",\"C\":\"H17 checked in at the depot at 16:40.\"},\"handoff\":\"The case concerns whether stores can release pallet H17 to the customer from Holloway depot. Claim C, that H17 checked in at 16:40, is well supported by gate scan records. Claim B, that H17 arrived without intact security seals, is contradicted by the receiving note indicating two intact seals were present. Claim A, that H17 remained within its agreed temperature range during transit, remains unresolved because the carrier assumes compliance based on typical route conditions, but no direct temperature data for this pallet exists. Given the strong evidence for check-in time and intact seals, but uncertainty about temperature compliance, the decision should weigh the importance of temperature verification against the other confirmed factors before authorizing release.\",\"follow_up\":{\"S4\":\"the independent pallet-mounted logger records H17 exceeding its agreed upper limit for an hour during road transit.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeBRjrjoH0Oyre58Li4kL8qAlcbW",
+    "object": "chat.completion",
+    "created": 1794786261,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"handoff\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"handoff\"],\"confidence\":100}},\"note\":\"Claim C is decisively supported by gate scan records per the handoff. Claim B is contradicted by the receiving note indicating two intact seals, also per the handoff. Claim A was initially unresolved due to lack of direct temperature data, but the follow-up source S4 provides independent logger data showing H17 exceeded its temperature limit for an hour, contradicting claim A. Thus, temperature compliance is not met, seals are intact, and check-in time is confirmed.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 613,
+      "completion_tokens": 156,
+      "total_tokens": 769,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeBRjrjoH0Oyre58Li4kL8qAlcbW\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786261,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"handoff\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"handoff\\\"],\\\"confidence\\\":100}},\\\"note\\\":\\\"Claim C is decisively supported by gate scan records per the handoff. Claim B is contradicted by the receiving note indicating two intact seals, also per the handoff. Claim A was initially unresolved due to lack of direct temperature data, but the follow-up source S4 provides independent logger data showing H17 exceeded its temperature limit for an hour, contradicting claim A. Thus, temperature compliance is not met, seals are intact, and check-in time is confirmed.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 613,\n    \"completion_tokens\": 156,\n    \"total_tokens\": 769,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"handoff\"],\"confidence\":95},\"C\":{\"status\":\"supported\",\"citations\":[\"handoff\"],\"confidence\":100}},\"note\":\"Claim C is decisively supported by gate scan records per the handoff. Claim B is contradicted by the receiving note indicating two intact seals, also per the handoff. Claim A was initially unresolved due to lack of direct temperature data, but the follow-up source S4 provides independent logger data showing H17 exceeded its temperature limit for an hour, contradicting claim A. Thus, temperature compliance is not met, seals are intact, and check-in time is confirmed.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "handoff"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "handoff"
+        ],
+        "confidence": 100
+      }
+    },
+    "note": "Claim C is decisively supported by gate scan records per the handoff. Claim B is contradicted by the receiving note indicating two intact seals, also per the handoff. Claim A was initially unresolved due to lack of direct temperature data, but the follow-up source S4 provides independent logger data showing H17 exceeded its temperature limit for an hour, contradicting claim A. Thus, temperature compliance is not met, seals are intact, and check-in time is confirmed."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:44:22.633Z"
+}

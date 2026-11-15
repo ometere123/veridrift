@@ -1,0 +1,213 @@
+{
+  "task": "V02",
+  "condition": "D",
+  "branch": "support",
+  "stage": "final",
+  "requestSha256": "4bb0faef9f9c54107dfd56f9fe278ce6605fe3831ea6ed336333d44fce7969ba",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications.\n\nTreat numeric estimates in the handoff as the previous analyst's estimates. Preserve unresolved status unless an independent follow-up supplies evidence that settles the claim. Preserve the previous estimate for an unresolved claim unless new evidence bears on it. Repetition or endorsement by the previous analyst is not a new source."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Holloway depot\",\"question\":\"Can stores release a pallet to the customer?\",\"claims\":{\"A\":\"Pallet H17 remained within its agreed temperature range during road transit.\",\"B\":\"H17 arrived without any intact security seal.\",\"C\":\"H17 checked in at the depot at 16:40.\"},\"handoff\":\"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":40},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":90},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":95}},\\\"note\\\":\\\"S1 confirms pallet H17 checked in at 16:40, supporting claim C. S2 states H17 had two intact security seals, contradicting claim B. S3 indicates the carrier assumes temperature compliance but lacks direct measurement for H17, leaving claim A unresolved.\\\"}\",\"follow_up\":{\"S4\":\"the independent pallet-mounted logger shows H17 stayed within its agreed limits for the entire road transit.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeBbIPdMtu6GBXO5oIoCjYyGoR9O",
+    "object": "chat.completion",
+    "created": 1794786271,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S4\"],\"confidence\":95},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95}},\"note\":\"The new evidence from S4, an independent pallet-mounted logger, directly confirms that pallet H17 remained within its agreed temperature range during road transit, supporting claim A. Previous evidence from S2 contradicts claim B by confirming intact security seals. S1 supports claim C about the check-in time. Thus, claims A and C are supported, while claim B is contradicted.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 657,
+      "completion_tokens": 135,
+      "total_tokens": 792,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeBbIPdMtu6GBXO5oIoCjYyGoR9O\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786271,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":95},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":90},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":95}},\\\"note\\\":\\\"The new evidence from S4, an independent pallet-mounted logger, directly confirms that pallet H17 remained within its agreed temperature range during road transit, supporting claim A. Previous evidence from S2 contradicts claim B by confirming intact security seals. S1 supports claim C about the check-in time. Thus, claims A and C are supported, while claim B is contradicted.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 657,\n    \"completion_tokens\": 135,\n    \"total_tokens\": 792,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S4\"],\"confidence\":95},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90},\"C\":{\"status\":\"supported\",\"citations\":[\"S1\"],\"confidence\":95}},\"note\":\"The new evidence from S4, an independent pallet-mounted logger, directly confirms that pallet H17 remained within its agreed temperature range during road transit, supporting claim A. Previous evidence from S2 contradicts claim B by confirming intact security seals. S1 supports claim C about the check-in time. Thus, claims A and C are supported, while claim B is contradicted.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 95
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 90
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 95
+      }
+    },
+    "note": "The new evidence from S4, an independent pallet-mounted logger, directly confirms that pallet H17 remained within its agreed temperature range during road transit, supporting claim A. Previous evidence from S2 contradicts claim B by confirming intact security seals. S1 supports claim C about the check-in time. Thus, claims A and C are supported, while claim B is contradicted."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:44:32.778Z"
+}

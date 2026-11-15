@@ -1,0 +1,213 @@
+{
+  "task": "V01",
+  "condition": "B",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "7710cb4b0f9eea7906fab04fc82cbae4bb20f2ecfc4693e35da051e52b17bc6f",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Northbrook treatment\",\"question\":\"Should the operator close the review for filter train M2?\",\"claims\":{\"A\":\"M2 passed the April pressure test.\",\"B\":\"A bypass on M2 received a flow alarm at 09:10.\",\"C\":\"M2 was serviced that morning.\"},\"handoff\":\"The case concerns whether to close the review for filter train M2. Claim A that M2 passed the April pressure test is unresolved, supported only by hearsay from maintenance chat without direct test data. Claim B, that a bypass on M2 triggered a flow alarm at 09:10, is well supported by control historian records with high confidence. Claim C, that M2 was serviced that morning, is contradicted by shift sign-off documentation stating no service occurred, also with high confidence. Given the unresolved test status and the flow alarm indicating a potential issue, alongside no confirmed servicing, it would be prudent not to close the review for M2 until further verification or test results are obtained.\",\"follow_up\":{\"S4\":\"metrology laboratory reports the witnessed M2 April pressure test fell below the pass standard at 14:05. It is independent of the chat sender.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeDULitNnSGzlraDeeaTHFQ07anS",
+    "object": "chat.completion",
+    "created": 1794786388,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":85},\"B\":{\"status\":\"supported\",\"citations\":[\"handoff\"],\"confidence\":90},\"C\":{\"status\":\"contradicted\",\"citations\":[\"handoff\"],\"confidence\":90}},\"note\":\"Claim A is contradicted by the independent metrology lab report (S4) showing M2 failed the April pressure test, overruling the hearsay chat. Claim B is supported by control historian records as noted in the handoff. Claim C is contradicted by shift sign-off documentation also noted in the handoff. The decisive evidence from S4 and shift records outweighs provisional indications from chat, supporting not closing the review for M2.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 617,
+      "completion_tokens": 151,
+      "total_tokens": 768,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeDULitNnSGzlraDeeaTHFQ07anS\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786388,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":85},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"handoff\\\"],\\\"confidence\\\":90},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"handoff\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"Claim A is contradicted by the independent metrology lab report (S4) showing M2 failed the April pressure test, overruling the hearsay chat. Claim B is supported by control historian records as noted in the handoff. Claim C is contradicted by shift sign-off documentation also noted in the handoff. The decisive evidence from S4 and shift records outweighs provisional indications from chat, supporting not closing the review for M2.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 617,\n    \"completion_tokens\": 151,\n    \"total_tokens\": 768,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":85},\"B\":{\"status\":\"supported\",\"citations\":[\"handoff\"],\"confidence\":90},\"C\":{\"status\":\"contradicted\",\"citations\":[\"handoff\"],\"confidence\":90}},\"note\":\"Claim A is contradicted by the independent metrology lab report (S4) showing M2 failed the April pressure test, overruling the hearsay chat. Claim B is supported by control historian records as noted in the handoff. Claim C is contradicted by shift sign-off documentation also noted in the handoff. The decisive evidence from S4 and shift records outweighs provisional indications from chat, supporting not closing the review for M2.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 85
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "handoff"
+        ],
+        "confidence": 90
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "handoff"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "Claim A is contradicted by the independent metrology lab report (S4) showing M2 failed the April pressure test, overruling the hearsay chat. Claim B is supported by control historian records as noted in the handoff. Claim C is contradicted by shift sign-off documentation also noted in the handoff. The decisive evidence from S4 and shift records outweighs provisional indications from chat, supporting not closing the review for M2."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:29.591Z"
+}

@@ -1,0 +1,192 @@
+{
+  "task": "V11",
+  "condition": "C",
+  "branch": "shared",
+  "stage": "relay",
+  "requestSha256": "8b3fd5defe35591bc13213ee92a4431ad08a5e3141c6381ecf43a34e08e1589a",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are handing a case over to the next analyst, who will make the decision. For every candidate claim, record whether the original records establish it (supported), establish its negation (contradicted), or do neither (unresolved). Attach the exact source identifiers of decisive records, or an empty list if none settle it. Use the note to summarize the relevant record contents and preserve source identifiers for anything mentioned. Omit confidence estimates. Keep the note under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Tern Audio Museum\",\"question\":\"Can the archive publish a channel specification?\",\"claims\":{\"A\":\"The archive ingested a digital file from session K.\",\"B\":\"The archive stored one verified copy.\",\"C\":\"The master from session K is stereo.\"},\"sources\":{\"S1\":\"the emailed file name includes 'stereo' but the sender says the same label was reused from two previous recordings.\",\"S2\":\"digital intake records a file from session K ingested.\",\"S3\":\"preservation log says the archive stored three verified copies.\"},\"prior_assessment\":{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":95},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S1\"],\"confidence\":60}},\"note\":\"Claim A is supported by the digital intake record (S2) confirming ingestion of a file from session K. Claim B is contradicted by the preservation log (S3) indicating three verified copies were stored, not one. Claim C is unresolved; the file name includes 'stereo' but the sender notes the label was reused, so the master’s stereo status is uncertain.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "provenance_handoff",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeDKW7Do3lACJD2c1xDzwObiCbKG",
+    "object": "chat.completion",
+    "created": 1794786378,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S2\"]},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"]},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S1\"]}},\"note\":\"Claim A is supported by S2 confirming ingestion of a file from session K. Claim B is contradicted by S3 showing three verified copies stored, not one. Claim C remains unresolved; S1 notes 'stereo' in the file name but also that the label was reused, so the master’s stereo status is uncertain.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 520,
+      "completion_tokens": 115,
+      "total_tokens": 635,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_4b4d03be55"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeDKW7Do3lACJD2c1xDzwObiCbKG\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786378,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"C\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S1\\\"]}},\\\"note\\\":\\\"Claim A is supported by S2 confirming ingestion of a file from session K. Claim B is contradicted by S3 showing three verified copies stored, not one. Claim C remains unresolved; S1 notes 'stereo' in the file name but also that the label was reused, so the master’s stereo status is uncertain.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 520,\n    \"completion_tokens\": 115,\n    \"total_tokens\": 635,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_4b4d03be55\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S2\"]},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"]},\"C\":{\"status\":\"unresolved\",\"citations\":[\"S1\"]}},\"note\":\"Claim A is supported by S2 confirming ingestion of a file from session K. Claim B is contradicted by S3 showing three verified copies stored, not one. Claim C remains unresolved; S1 notes 'stereo' in the file name but also that the label was reused, so the master’s stereo status is uncertain.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S2"
+        ]
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ]
+      },
+      "C": {
+        "status": "unresolved",
+        "citations": [
+          "S1"
+        ]
+      }
+    },
+    "note": "Claim A is supported by S2 confirming ingestion of a file from session K. Claim B is contradicted by S3 showing three verified copies stored, not one. Claim C remains unresolved; S1 notes 'stereo' in the file name but also that the label was reused, so the master’s stereo status is uncertain."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:19.209Z"
+}

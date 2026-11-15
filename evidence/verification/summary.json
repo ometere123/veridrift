@@ -1,0 +1,1818 @@
+{
+  "tasks": 24,
+  "plannedFinals": 288,
+  "finalStates": {
+    "missing": 0,
+    "no_content": 0,
+    "invalid_schema": 0,
+    "invalid_record": 0,
+    "incomplete_output": 0,
+    "valid": 288
+  },
+  "initialStates": {
+    "missing": 0,
+    "no_content": 0,
+    "invalid_schema": 0,
+    "invalid_record": 0,
+    "incomplete_output": 0,
+    "valid": 24
+  },
+  "relayStates": {
+    "B": {
+      "missing": 0,
+      "no_content": 0,
+      "invalid_schema": 0,
+      "invalid_record": 0,
+      "incomplete_output": 0,
+      "valid": 24
+    },
+    "C": {
+      "missing": 0,
+      "no_content": 0,
+      "invalid_schema": 0,
+      "invalid_record": 0,
+      "incomplete_output": 0,
+      "valid": 24
+    },
+    "D": {
+      "missing": 0,
+      "no_content": 0,
+      "invalid_schema": 0,
+      "invalid_record": 0,
+      "incomplete_output": 0,
+      "valid": 24
+    }
+  },
+  "descriptive": {
+    "A": {
+      "none": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "unresolvedCertainty": {
+          "numerator": 3,
+          "denominator": 24,
+          "rate": 0.125
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 26,
+          "denominator": 48,
+          "rate": 0.5416666666666666
+        },
+        "unsupportedAssertion": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.0625,
+          0.0625
+        ],
+        "verdictAccuracy": {
+          "numerator": 68,
+          "denominator": 72,
+          "rate": 0.9444444444444444
+        },
+        "unresolvedSensitivity": {
+          "numerator": 21,
+          "denominator": 24,
+          "rate": 0.875
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 48,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 47,
+          "denominator": 48,
+          "rate": 0.9791666666666666
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 47,
+          "denominator": 64,
+          "rate": 0.734375
+        }
+      },
+      "support": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 24,
+          "denominator": 24,
+          "rate": 1
+        },
+        "unsupportedAssertion": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "plannedAtRiskSlots": 24,
+        "unsupportedCertaintyMissingnessBounds": [
+          0,
+          0
+        ],
+        "verdictAccuracy": {
+          "numerator": 71,
+          "denominator": 72,
+          "rate": 0.9861111111111112
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 72,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 68,
+          "denominator": 72,
+          "rate": 0.9444444444444444
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 71,
+          "denominator": 75,
+          "rate": 0.9466666666666667
+        }
+      },
+      "retract": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "highTruthConfidence": {
+          "numerator": 40,
+          "denominator": 48,
+          "rate": 0.8333333333333334
+        },
+        "unsupportedAssertion": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.041666666666666664,
+          0.041666666666666664
+        ],
+        "verdictAccuracy": {
+          "numerator": 70,
+          "denominator": 72,
+          "rate": 0.9722222222222222
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 72,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 70,
+          "denominator": 72,
+          "rate": 0.9722222222222222
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 70,
+          "denominator": 73,
+          "rate": 0.958904109589041
+        }
+      }
+    },
+    "B": {
+      "none": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "unresolvedCertainty": {
+          "numerator": 2,
+          "denominator": 24,
+          "rate": 0.08333333333333333
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 22,
+          "denominator": 48,
+          "rate": 0.4583333333333333
+        },
+        "unsupportedAssertion": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.041666666666666664,
+          0.041666666666666664
+        ],
+        "verdictAccuracy": {
+          "numerator": 67,
+          "denominator": 72,
+          "rate": 0.9305555555555556
+        },
+        "unresolvedSensitivity": {
+          "numerator": 20,
+          "denominator": 24,
+          "rate": 0.8333333333333334
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 48,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 28,
+          "denominator": 48,
+          "rate": 0.5833333333333334
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 28,
+          "denominator": 65,
+          "rate": 0.4307692307692308
+        }
+      },
+      "support": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 21,
+          "denominator": 24,
+          "rate": 0.875
+        },
+        "unsupportedAssertion": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "plannedAtRiskSlots": 24,
+        "unsupportedCertaintyMissingnessBounds": [
+          0,
+          0
+        ],
+        "verdictAccuracy": {
+          "numerator": 68,
+          "denominator": 72,
+          "rate": 0.9444444444444444
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 1,
+          "denominator": 72,
+          "rate": 0.013888888888888888
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 47,
+          "denominator": 72,
+          "rate": 0.6527777777777778
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 48,
+          "denominator": 71,
+          "rate": 0.676056338028169
+        }
+      },
+      "retract": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "highTruthConfidence": {
+          "numerator": 38,
+          "denominator": 48,
+          "rate": 0.7916666666666666
+        },
+        "unsupportedAssertion": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.0625,
+          0.0625
+        ],
+        "verdictAccuracy": {
+          "numerator": 67,
+          "denominator": 72,
+          "rate": 0.9305555555555556
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 1,
+          "denominator": 72,
+          "rate": 0.013888888888888888
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 46,
+          "denominator": 72,
+          "rate": 0.6388888888888888
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 47,
+          "denominator": 74,
+          "rate": 0.6351351351351351
+        }
+      }
+    },
+    "C": {
+      "none": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "unresolvedCertainty": {
+          "numerator": 3,
+          "denominator": 24,
+          "rate": 0.125
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 25,
+          "denominator": 48,
+          "rate": 0.5208333333333334
+        },
+        "unsupportedAssertion": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.0625,
+          0.0625
+        ],
+        "verdictAccuracy": {
+          "numerator": 68,
+          "denominator": 72,
+          "rate": 0.9444444444444444
+        },
+        "unresolvedSensitivity": {
+          "numerator": 21,
+          "denominator": 24,
+          "rate": 0.875
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 48,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 47,
+          "denominator": 48,
+          "rate": 0.9791666666666666
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 47,
+          "denominator": 63,
+          "rate": 0.746031746031746
+        }
+      },
+      "support": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 22,
+          "denominator": 24,
+          "rate": 0.9166666666666666
+        },
+        "unsupportedAssertion": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "plannedAtRiskSlots": 24,
+        "unsupportedCertaintyMissingnessBounds": [
+          0,
+          0
+        ],
+        "verdictAccuracy": {
+          "numerator": 71,
+          "denominator": 72,
+          "rate": 0.9861111111111112
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 72,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 66,
+          "denominator": 72,
+          "rate": 0.9166666666666666
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 71,
+          "denominator": 77,
+          "rate": 0.922077922077922
+        }
+      },
+      "retract": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 4,
+          "denominator": 48,
+          "rate": 0.08333333333333333
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 4,
+          "denominator": 48,
+          "rate": 0.08333333333333333
+        },
+        "highTruthConfidence": {
+          "numerator": 37,
+          "denominator": 48,
+          "rate": 0.7708333333333334
+        },
+        "unsupportedAssertion": {
+          "numerator": 4,
+          "denominator": 48,
+          "rate": 0.08333333333333333
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.08333333333333333,
+          0.08333333333333333
+        ],
+        "verdictAccuracy": {
+          "numerator": 67,
+          "denominator": 72,
+          "rate": 0.9305555555555556
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 72,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 67,
+          "denominator": 72,
+          "rate": 0.9305555555555556
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 67,
+          "denominator": 73,
+          "rate": 0.9178082191780822
+        }
+      }
+    },
+    "D": {
+      "none": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "unresolvedCertainty": {
+          "numerator": 2,
+          "denominator": 24,
+          "rate": 0.08333333333333333
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 25,
+          "denominator": 48,
+          "rate": 0.5208333333333334
+        },
+        "unsupportedAssertion": {
+          "numerator": 3,
+          "denominator": 48,
+          "rate": 0.0625
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.041666666666666664,
+          0.041666666666666664
+        ],
+        "verdictAccuracy": {
+          "numerator": 68,
+          "denominator": 72,
+          "rate": 0.9444444444444444
+        },
+        "unresolvedSensitivity": {
+          "numerator": 21,
+          "denominator": 24,
+          "rate": 0.875
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 48,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 47,
+          "denominator": 48,
+          "rate": 0.9791666666666666
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 47,
+          "denominator": 65,
+          "rate": 0.7230769230769231
+        }
+      },
+      "support": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "highTruthConfidence": {
+          "numerator": 23,
+          "denominator": 24,
+          "rate": 0.9583333333333334
+        },
+        "unsupportedAssertion": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "plannedAtRiskSlots": 24,
+        "unsupportedCertaintyMissingnessBounds": [
+          0,
+          0
+        ],
+        "verdictAccuracy": {
+          "numerator": 70,
+          "denominator": 72,
+          "rate": 0.9722222222222222
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 72,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 65,
+          "denominator": 72,
+          "rate": 0.9027777777777778
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 70,
+          "denominator": 77,
+          "rate": 0.9090909090909091
+        }
+      },
+      "retract": {
+        "states": {
+          "missing": 0,
+          "no_content": 0,
+          "invalid_schema": 0,
+          "invalid_record": 0,
+          "incomplete_output": 0,
+          "valid": 24
+        },
+        "unsupportedCertainty": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "unresolvedCertainty": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "contradictedCertainty": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "highTruthConfidence": {
+          "numerator": 33,
+          "denominator": 48,
+          "rate": 0.6875
+        },
+        "unsupportedAssertion": {
+          "numerator": 2,
+          "denominator": 48,
+          "rate": 0.041666666666666664
+        },
+        "plannedAtRiskSlots": 48,
+        "unsupportedCertaintyMissingnessBounds": [
+          0.041666666666666664,
+          0.041666666666666664
+        ],
+        "verdictAccuracy": {
+          "numerator": 69,
+          "denominator": 72,
+          "rate": 0.9583333333333334
+        },
+        "unresolvedSensitivity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "determinateAbstentions": {
+          "numerator": 0,
+          "denominator": 72,
+          "rate": 0
+        },
+        "strictEvidenceFidelity": {
+          "numerator": 69,
+          "denominator": 72,
+          "rate": 0.9583333333333334
+        },
+        "decisiveCitationPrecision": {
+          "numerator": 69,
+          "denominator": 72,
+          "rate": 0.9583333333333334
+        }
+      }
+    }
+  },
+  "pairedUnsupportedCertainty": {
+    "D-B": {
+      "estimate": 0,
+      "interval95": [
+        0,
+        0
+      ],
+      "completePairs": 24,
+      "pairsUnavailable": 0,
+      "distinctObservedDifferences": 1
+    },
+    "D-C": {
+      "estimate": -0.020833333333333332,
+      "interval95": [
+        -0.0625,
+        0
+      ],
+      "completePairs": 24,
+      "pairsUnavailable": 0,
+      "distinctObservedDifferences": 2
+    },
+    "B-A": {
+      "estimate": -0.020833333333333332,
+      "interval95": [
+        -0.08333333333333333,
+        0.041666666666666664
+      ],
+      "completePairs": 24,
+      "pairsUnavailable": 0,
+      "distinctObservedDifferences": 3
+    }
+  },
+  "amplification": {
+    "B": {
+      "meanPoints": 3.5416666666666665,
+      "validTaskPairs": 24,
+      "increases": {
+        "numerator": 18,
+        "denominator": 48,
+        "rate": 0.375
+      },
+      "decreases": {
+        "numerator": 10,
+        "denominator": 48,
+        "rate": 0.20833333333333334
+      }
+    },
+    "C": {
+      "meanPoints": 3.5416666666666665,
+      "validTaskPairs": 24,
+      "increases": {
+        "numerator": 21,
+        "denominator": 48,
+        "rate": 0.4375
+      },
+      "decreases": {
+        "numerator": 6,
+        "denominator": 48,
+        "rate": 0.125
+      }
+    },
+    "D": {
+      "meanPoints": 0,
+      "validTaskPairs": 24,
+      "increases": {
+        "numerator": 0,
+        "denominator": 48,
+        "rate": 0
+      },
+      "decreases": {
+        "numerator": 0,
+        "denominator": 48,
+        "rate": 0
+      }
+    }
+  },
+  "amplificationByBaselineReference": {
+    "B": {
+      "unresolved": {
+        "meanPoints": 5.625,
+        "validTaskPairs": 24,
+        "increases": {
+          "numerator": 14,
+          "denominator": 24,
+          "rate": 0.5833333333333334
+        },
+        "decreases": {
+          "numerator": 4,
+          "denominator": 24,
+          "rate": 0.16666666666666666
+        }
+      },
+      "contradicted": {
+        "meanPoints": 1.4583333333333333,
+        "validTaskPairs": 24,
+        "increases": {
+          "numerator": 4,
+          "denominator": 24,
+          "rate": 0.16666666666666666
+        },
+        "decreases": {
+          "numerator": 6,
+          "denominator": 24,
+          "rate": 0.25
+        }
+      }
+    },
+    "C": {
+      "unresolved": {
+        "meanPoints": 6.25,
+        "validTaskPairs": 24,
+        "increases": {
+          "numerator": 15,
+          "denominator": 24,
+          "rate": 0.625
+        },
+        "decreases": {
+          "numerator": 3,
+          "denominator": 24,
+          "rate": 0.125
+        }
+      },
+      "contradicted": {
+        "meanPoints": 0.8333333333333334,
+        "validTaskPairs": 24,
+        "increases": {
+          "numerator": 6,
+          "denominator": 24,
+          "rate": 0.25
+        },
+        "decreases": {
+          "numerator": 3,
+          "denominator": 24,
+          "rate": 0.125
+        }
+      }
+    },
+    "D": {
+      "unresolved": {
+        "meanPoints": 0,
+        "validTaskPairs": 24,
+        "increases": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "decreases": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        }
+      },
+      "contradicted": {
+        "meanPoints": 0,
+        "validTaskPairs": 24,
+        "increases": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        },
+        "decreases": {
+          "numerator": 0,
+          "denominator": 24,
+          "rate": 0
+        }
+      }
+    }
+  },
+  "pairedAmplification": {
+    "D-B": {
+      "estimate": -3.5416666666666665,
+      "interval95": [
+        -8.4375,
+        0.10416666666666667
+      ],
+      "completePairs": 24,
+      "pairsUnavailable": 0,
+      "distinctObservedDifferences": 9
+    },
+    "D-C": {
+      "estimate": -3.5416666666666665,
+      "interval95": [
+        -8.958333333333334,
+        1.5625
+      ],
+      "completePairs": 24,
+      "pairsUnavailable": 0,
+      "distinctObservedDifferences": 8
+    }
+  },
+  "revision": {
+    "A": {
+      "support": {
+        "strictPostUpdateFidelity": {
+          "numerator": 20,
+          "denominator": 24,
+          "rate": 0.8333333333333334
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 19,
+          "denominator": 21,
+          "rate": 0.9047619047619048
+        },
+        "meanSignedConfidenceChange": 33.375,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": null
+      },
+      "retract": {
+        "strictPostUpdateFidelity": {
+          "numerator": 23,
+          "denominator": 24,
+          "rate": 0.9583333333333334
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 3,
+          "denominator": 21,
+          "rate": 0.14285714285714285
+        },
+        "meanSignedConfidenceChange": -22.083333333333332,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": null
+      }
+    },
+    "B": {
+      "support": {
+        "strictPostUpdateFidelity": {
+          "numerator": 19,
+          "denominator": 24,
+          "rate": 0.7916666666666666
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 17,
+          "denominator": 20,
+          "rate": 0.85
+        },
+        "meanSignedConfidenceChange": 27,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": null
+      },
+      "retract": {
+        "strictPostUpdateFidelity": {
+          "numerator": 18,
+          "denominator": 24,
+          "rate": 0.75
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 0,
+          "denominator": 20,
+          "rate": 0
+        },
+        "meanSignedConfidenceChange": -22.291666666666668,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": {
+          "numerator": 1,
+          "denominator": 3,
+          "rate": 0.3333333333333333
+        }
+      }
+    },
+    "C": {
+      "support": {
+        "strictPostUpdateFidelity": {
+          "numerator": 19,
+          "denominator": 24,
+          "rate": 0.7916666666666666
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 19,
+          "denominator": 21,
+          "rate": 0.9047619047619048
+        },
+        "meanSignedConfidenceChange": 29.916666666666668,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": null
+      },
+      "retract": {
+        "strictPostUpdateFidelity": {
+          "numerator": 20,
+          "denominator": 24,
+          "rate": 0.8333333333333334
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 1,
+          "denominator": 21,
+          "rate": 0.047619047619047616
+        },
+        "meanSignedConfidenceChange": -19.375,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": {
+          "numerator": 2,
+          "denominator": 3,
+          "rate": 0.6666666666666666
+        }
+      }
+    },
+    "D": {
+      "support": {
+        "strictPostUpdateFidelity": {
+          "numerator": 18,
+          "denominator": 24,
+          "rate": 0.75
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 18,
+          "denominator": 21,
+          "rate": 0.8571428571428571
+        },
+        "meanSignedConfidenceChange": 35.208333333333336,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": null
+      },
+      "retract": {
+        "strictPostUpdateFidelity": {
+          "numerator": 22,
+          "denominator": 24,
+          "rate": 0.9166666666666666
+        },
+        "strictRevisionAmongPreviouslyUnresolved": {
+          "numerator": 9,
+          "denominator": 21,
+          "rate": 0.42857142857142855
+        },
+        "meanSignedConfidenceChange": -4.583333333333333,
+        "pairedConfidenceCount": 24,
+        "retractionOfInitialEndorsement": {
+          "numerator": 2,
+          "denominator": 3,
+          "rate": 0.6666666666666666
+        }
+      }
+    }
+  },
+  "pairedPostUpdateFidelity": {
+    "support": {
+      "estimate": -0.041666666666666664,
+      "interval95": [
+        -0.20833333333333334,
+        0.125
+      ],
+      "completePairs": 24,
+      "pairsUnavailable": 0,
+      "distinctObservedDifferences": 3
+    },
+    "retract": {
+      "estimate": 0.16666666666666666,
+      "interval95": [
+        0.041666666666666664,
+        0.3333333333333333
+      ],
+      "completePairs": 24,
+      "pairsUnavailable": 0,
+      "distinctObservedDifferences": 2
+    }
+  },
+  "examples": {
+    "A": {
+      "supportCorrectRevision": {
+        "id": "V01",
+        "domain": "water",
+        "claimId": "A",
+        "claim": "M2 passed the April pressure test.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 60
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "control historian records a flow alarm on M2 bypass at 09:10.",
+          "S2": "shift sign-off says the site used filter train M1 all morning and no service was performed on M2.",
+          "S3": "maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results.",
+          "S4": "metrology laboratory reports the witnessed M2 April pressure test met the pass standard at 14:05. It is independent of the chat sender."
+        },
+        "rawFile": "V01-A-support-final.json"
+      },
+      "retractCorrectRevision": {
+        "id": "V01",
+        "domain": "water",
+        "claimId": "A",
+        "claim": "M2 passed the April pressure test.",
+        "reference": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 60
+        },
+        "final": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 20
+        },
+        "sources": {
+          "S1": "control historian records a flow alarm on M2 bypass at 09:10.",
+          "S2": "shift sign-off says the site used filter train M1 all morning and no service was performed on M2.",
+          "S3": "maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results.",
+          "S4": "metrology laboratory reports the witnessed M2 April pressure test fell below the pass standard at 14:05. It is independent of the chat sender."
+        },
+        "rawFile": "V01-A-retract-final.json"
+      },
+      "supportIncorrectOutcome": {
+        "id": "V10",
+        "domain": "transport",
+        "claimId": "B",
+        "claim": "The 12:10 ferry crossed before traffic reopened.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [],
+          "confidence": 50
+        },
+        "final": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 85
+        },
+        "sources": {
+          "S1": "a draft dispatch summary marks crossing first then road opening, but explicitly combines entries from unsynchronised clocks.",
+          "S2": "dock departure log records the specified ferry leaving at 12:10.",
+          "S3": "mechanical register assigns the ferry hull number 42.",
+          "S4": "an independent clock-aligned video reconciliation shows the hull-42 crossing ended at 12:19 and traffic reopened at 12:24."
+        },
+        "rawFile": "V10-A-support-final.json"
+      },
+      "unresolvedCertainty": {
+        "id": "V12",
+        "domain": "retail",
+        "claimId": "C",
+        "claim": "Shipment G11 contained at least 96 saleable jars at arrival.",
+        "reference": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "S1",
+            "S2"
+          ],
+          "confidence": 85
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S1",
+            "S2"
+          ],
+          "confidence": 85
+        },
+        "sources": {
+          "S1": "the packing plan specifies 16 jars per carton. Staff did not count or inspect the jars and described 96 as the expected saleable count.",
+          "S2": "courier unloading receipt confirms six G11 cartons arrived.",
+          "S3": "pallet inspection confirms the pallet was dry on arrival."
+        },
+        "rawFile": "V12-A-none-final.json"
+      },
+      "retractIncorrectOutcome": {
+        "id": "V12",
+        "domain": "retail",
+        "claimId": "C",
+        "claim": "Shipment G11 contained at least 96 saleable jars at arrival.",
+        "reference": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "S1",
+            "S2"
+          ],
+          "confidence": 85
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S1",
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "the packing plan specifies 16 jars per carton. Staff did not count or inspect the jars and described 96 as the expected saleable count.",
+          "S2": "courier unloading receipt confirms six G11 cartons arrived.",
+          "S3": "pallet inspection confirms the pallet was dry on arrival.",
+          "S4": "an independent sealed-camera count and inspection at arrival confirms 92 saleable jars and four broken ones in G11."
+        },
+        "rawFile": "V12-A-retract-final.json"
+      }
+    },
+    "B": {
+      "supportCorrectRevision": {
+        "id": "V01",
+        "domain": "water",
+        "claimId": "A",
+        "claim": "M2 passed the April pressure test.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [],
+          "confidence": 50
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "control historian records a flow alarm on M2 bypass at 09:10.",
+          "S2": "shift sign-off says the site used filter train M1 all morning and no service was performed on M2.",
+          "S3": "maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results.",
+          "S4": "metrology laboratory reports the witnessed M2 April pressure test met the pass standard at 14:05. It is independent of the chat sender."
+        },
+        "rawFile": "V01-B-support-final.json"
+      },
+      "supportIncorrectOutcome": {
+        "id": "V03",
+        "domain": "facilities",
+        "claimId": "B",
+        "claim": "The replacement microphone worked in Room F at the post-repair test.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [],
+          "confidence": 60
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "follow_up"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "venue calendar records Room F booked for 19:00.",
+          "S2": "technician photographed a cracked wall plate in Room F at 15:00.",
+          "S3": "supplier receipt confirms the new microphone powered on before shipment. A venue coordinator writes that it likely works in Room F.",
+          "S4": "the independent evening crew's signed Room F post-repair test records sound captured cleanly from the replacement microphone."
+        },
+        "rawFile": "V03-B-support-final.json"
+      },
+      "unresolvedCertainty": {
+        "id": "V08",
+        "domain": "energy",
+        "claimId": "A",
+        "claim": "The battery supplied emergency loads continuously for 60 minutes on Thursday.",
+        "reference": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "handoff"
+          ],
+          "confidence": 90
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "handoff"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "generator log shows the diesel generator was disconnected for the trial.",
+          "S2": "trial sign-in records the start Thursday at 08:00.",
+          "S3": "mobile dashboard reports a battery runtime estimate of 62 minutes. An email calls the trial a success based on that estimate."
+        },
+        "rawFile": "V08-B-none-final.json"
+      },
+      "retractIncorrectOutcome": {
+        "id": "V08",
+        "domain": "energy",
+        "claimId": "A",
+        "claim": "The battery supplied emergency loads continuously for 60 minutes on Thursday.",
+        "reference": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "handoff"
+          ],
+          "confidence": 90
+        },
+        "final": {
+          "status": "unresolved",
+          "citations": [
+            "handoff",
+            "S4"
+          ],
+          "confidence": 70
+        },
+        "sources": {
+          "S1": "generator log shows the diesel generator was disconnected for the trial.",
+          "S2": "trial sign-in records the start Thursday at 08:00.",
+          "S3": "mobile dashboard reports a battery runtime estimate of 62 minutes. An email calls the trial a success based on that estimate.",
+          "S4": "independent inline power logger records the battery losing emergency load after 43 minutes Thursday."
+        },
+        "rawFile": "V08-B-retract-final.json"
+      }
+    },
+    "C": {
+      "supportCorrectRevision": {
+        "id": "V01",
+        "domain": "water",
+        "claimId": "A",
+        "claim": "M2 passed the April pressure test.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 60
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "control historian records a flow alarm on M2 bypass at 09:10.",
+          "S2": "shift sign-off says the site used filter train M1 all morning and no service was performed on M2.",
+          "S3": "maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results.",
+          "S4": "metrology laboratory reports the witnessed M2 April pressure test met the pass standard at 14:05. It is independent of the chat sender."
+        },
+        "rawFile": "V01-C-support-final.json"
+      },
+      "retractCorrectRevision": {
+        "id": "V04",
+        "domain": "procurement",
+        "claimId": "B",
+        "claim": "Vendor Vale held the required liability policy on 1 July.",
+        "reference": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [],
+          "confidence": 50
+        },
+        "final": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 20
+        },
+        "sources": {
+          "S1": "tender portal sealed and timestamped the Vale bid 42 minutes before the deadline.",
+          "S2": "Vale circulated a draft quote saying its coverage should start 1 July. It is labelled conditional on payment and contains no binding notice.",
+          "S3": "tender portal shows Vale bid on lot 2 only.",
+          "S4": "the insurer, independent of the vendor, confirms no active policy covered Vale on 1 July."
+        },
+        "rawFile": "V04-C-retract-final.json"
+      },
+      "unresolvedCertainty": {
+        "id": "V08",
+        "domain": "energy",
+        "claimId": "A",
+        "claim": "The battery supplied emergency loads continuously for 60 minutes on Thursday.",
+        "reference": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 90
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "generator log shows the diesel generator was disconnected for the trial.",
+          "S2": "trial sign-in records the start Thursday at 08:00.",
+          "S3": "mobile dashboard reports a battery runtime estimate of 62 minutes. An email calls the trial a success based on that estimate."
+        },
+        "rawFile": "V08-C-none-final.json"
+      },
+      "supportIncorrectOutcome": {
+        "id": "V08",
+        "domain": "energy",
+        "claimId": "A",
+        "claim": "The battery supplied emergency loads continuously for 60 minutes on Thursday.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 90
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S3",
+            "S4"
+          ],
+          "confidence": 95
+        },
+        "sources": {
+          "S1": "generator log shows the diesel generator was disconnected for the trial.",
+          "S2": "trial sign-in records the start Thursday at 08:00.",
+          "S3": "mobile dashboard reports a battery runtime estimate of 62 minutes. An email calls the trial a success based on that estimate.",
+          "S4": "independent inline power logger records the battery supplying the emergency loads without interruption for the first 60 minutes Thursday."
+        },
+        "rawFile": "V08-C-support-final.json"
+      },
+      "retractIncorrectOutcome": {
+        "id": "V10",
+        "domain": "transport",
+        "claimId": "B",
+        "claim": "The 12:10 ferry crossed before traffic reopened.",
+        "reference": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [],
+          "confidence": 50
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "a draft dispatch summary marks crossing first then road opening, but explicitly combines entries from unsynchronised clocks.",
+          "S2": "dock departure log records the specified ferry leaving at 12:10.",
+          "S3": "mechanical register assigns the ferry hull number 42.",
+          "S4": "an independent clock-aligned video reconciliation shows traffic reopened at 12:14 and the hull-42 crossing ended at 12:19."
+        },
+        "rawFile": "V10-C-retract-final.json"
+      }
+    },
+    "D": {
+      "supportCorrectRevision": {
+        "id": "V01",
+        "domain": "water",
+        "claimId": "A",
+        "claim": "M2 passed the April pressure test.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 60
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 95
+        },
+        "sources": {
+          "S1": "control historian records a flow alarm on M2 bypass at 09:10.",
+          "S2": "shift sign-off says the site used filter train M1 all morning and no service was performed on M2.",
+          "S3": "maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results.",
+          "S4": "metrology laboratory reports the witnessed M2 April pressure test met the pass standard at 14:05. It is independent of the chat sender."
+        },
+        "rawFile": "V01-D-support-final.json"
+      },
+      "retractCorrectRevision": {
+        "id": "V01",
+        "domain": "water",
+        "claimId": "A",
+        "claim": "M2 passed the April pressure test.",
+        "reference": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "unresolved",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 60
+        },
+        "final": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 20
+        },
+        "sources": {
+          "S1": "control historian records a flow alarm on M2 bypass at 09:10.",
+          "S2": "shift sign-off says the site used filter train M1 all morning and no service was performed on M2.",
+          "S3": "maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results.",
+          "S4": "metrology laboratory reports the witnessed M2 April pressure test fell below the pass standard at 14:05. It is independent of the chat sender."
+        },
+        "rawFile": "V01-D-retract-final.json"
+      },
+      "unresolvedCertainty": {
+        "id": "V08",
+        "domain": "energy",
+        "claimId": "A",
+        "claim": "The battery supplied emergency loads continuously for 60 minutes on Thursday.",
+        "reference": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 85
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 85
+        },
+        "sources": {
+          "S1": "generator log shows the diesel generator was disconnected for the trial.",
+          "S2": "trial sign-in records the start Thursday at 08:00.",
+          "S3": "mobile dashboard reports a battery runtime estimate of 62 minutes. An email calls the trial a success based on that estimate."
+        },
+        "rawFile": "V08-D-none-final.json"
+      },
+      "supportIncorrectOutcome": {
+        "id": "V08",
+        "domain": "energy",
+        "claimId": "A",
+        "claim": "The battery supplied emergency loads continuously for 60 minutes on Thursday.",
+        "reference": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ],
+          "confidence": 85
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S3",
+            "S4"
+          ],
+          "confidence": 90
+        },
+        "sources": {
+          "S1": "generator log shows the diesel generator was disconnected for the trial.",
+          "S2": "trial sign-in records the start Thursday at 08:00.",
+          "S3": "mobile dashboard reports a battery runtime estimate of 62 minutes. An email calls the trial a success based on that estimate.",
+          "S4": "independent inline power logger records the battery supplying the emergency loads without interruption for the first 60 minutes Thursday."
+        },
+        "rawFile": "V08-D-support-final.json"
+      },
+      "retractIncorrectOutcome": {
+        "id": "V12",
+        "domain": "retail",
+        "claimId": "C",
+        "claim": "Shipment G11 contained at least 96 saleable jars at arrival.",
+        "reference": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "prior": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ],
+          "confidence": 80
+        },
+        "final": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ],
+          "confidence": 95
+        },
+        "sources": {
+          "S1": "the packing plan specifies 16 jars per carton. Staff did not count or inspect the jars and described 96 as the expected saleable count.",
+          "S2": "courier unloading receipt confirms six G11 cartons arrived.",
+          "S3": "pallet inspection confirms the pallet was dry on arrival.",
+          "S4": "an independent sealed-camera count and inspection at arrival confirms 92 saleable jars and four broken ones in G11."
+        },
+        "rawFile": "V12-D-retract-final.json"
+      }
+    }
+  },
+  "integrity": {
+    "benchmarkSha256": "b44394a244500b520ae27a379fe375bed5da2857f5a6a07714f723e245f42832",
+    "rawRecordCount": 384,
+    "issues": [],
+    "extraJsonFiles": []
+  }
+}

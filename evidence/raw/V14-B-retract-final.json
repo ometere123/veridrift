@@ -1,0 +1,213 @@
+{
+  "task": "V14",
+  "condition": "B",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "9c03e52a058fbe0949837d5d395b6d6e2188abae3fa9a34d09c44f6aff3ed8c0",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"East Pennant irrigation\",\"question\":\"Can lands staff certify the pump telemetry report?\",\"claims\":{\"A\":\"Pump P9 reached at least 40 litres per minute on its first test.\",\"B\":\"P9 had a 3-inch intake installed on the test bench.\",\"C\":\"Technicians powered P9 on Wednesday.\"},\"handoff\":\"The case concerns whether lands staff can certify the pump telemetry report for East Pennant irrigation. Claim C, that technicians powered pump P9 on Wednesday, is well supported by the bench activation register (S3) with high confidence. Claim B, that P9 had a 3-inch intake installed on the test bench, is contradicted by the bench register (S1), which specifies a 2-inch intake. Claim A, that P9 reached at least 40 litres per minute on its first test, remains unresolved; while a maintenance engineer’s design curve (S2) suggests 40 litres per minute is plausible, there is no direct evidence confirming this flow was achieved during the initial test. These findings should guide the decision on certification.\",\"follow_up\":{\"S4\":\"an independent calibrated meter records P9 never exceeding 37 litres per minute during its first test.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeDBjy6csscue028TjUWFVrqYYow",
+    "object": "chat.completion",
+    "created": 1794786369,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":70},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S1\"],\"confidence\":90},\"C\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":95}},\"note\":\"Claim C is decisively supported by the bench activation register (S3). Claim B is decisively contradicted by the bench register (S1) specifying a 2-inch intake, not 3-inch. Claim A was previously unresolved but is now contradicted by the independent calibrated meter (S4) showing P9 never exceeded 37 litres per minute on its first test, despite the design curve (S2) suggesting 40 litres per minute is plausible. Thus, the records do not support that P9 reached 40 litres per minute initially.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 622,
+      "completion_tokens": 173,
+      "total_tokens": 795,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_14fd5f612e"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeDBjy6csscue028TjUWFVrqYYow\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786369,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":70},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S1\\\"],\\\"confidence\\\":90},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":95}},\\\"note\\\":\\\"Claim C is decisively supported by the bench activation register (S3). Claim B is decisively contradicted by the bench register (S1) specifying a 2-inch intake, not 3-inch. Claim A was previously unresolved but is now contradicted by the independent calibrated meter (S4) showing P9 never exceeded 37 litres per minute on its first test, despite the design curve (S2) suggesting 40 litres per minute is plausible. Thus, the records do not support that P9 reached 40 litres per minute initially.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 622,\n    \"completion_tokens\": 173,\n    \"total_tokens\": 795,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_14fd5f612e\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":70},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S1\"],\"confidence\":90},\"C\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":95}},\"note\":\"Claim C is decisively supported by the bench activation register (S3). Claim B is decisively contradicted by the bench register (S1) specifying a 2-inch intake, not 3-inch. Claim A was previously unresolved but is now contradicted by the independent calibrated meter (S4) showing P9 never exceeded 37 litres per minute on its first test, despite the design curve (S2) suggesting 40 litres per minute is plausible. Thus, the records do not support that P9 reached 40 litres per minute initially.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 70
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S1"
+        ],
+        "confidence": 90
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 95
+      }
+    },
+    "note": "Claim C is decisively supported by the bench activation register (S3). Claim B is decisively contradicted by the bench register (S1) specifying a 2-inch intake, not 3-inch. Claim A was previously unresolved but is now contradicted by the independent calibrated meter (S4) showing P9 never exceeded 37 litres per minute on its first test, despite the design curve (S2) suggesting 40 litres per minute is plausible. Thus, the records do not support that P9 reached 40 litres per minute initially."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:10.694Z"
+}

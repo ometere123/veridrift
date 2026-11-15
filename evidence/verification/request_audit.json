@@ -1,0 +1,176 @@
+{
+  "snapshotIds": [
+    "gpt-4.1-mini-2025-04-14"
+  ],
+  "uniqueProviderCompletionIds": 384,
+  "main": {
+    "records": 384,
+    "deliveredResponses": 384,
+    "responsesWithUsage": 384,
+    "promptTokens": 216959,
+    "cachedPromptTokens": 0,
+    "completionTokens": 54862,
+    "systemCharacters": 358296,
+    "userCharacters": 347221,
+    "handoffCharacters": 119439,
+    "finishReasons": {
+      "stop": 384
+    },
+    "estimatedUsd": 0.17456280000000002,
+    "undiscountedUsd": 0.17456280000000002
+  },
+  "perConditionStage": {
+    "A-final": {
+      "records": 72,
+      "deliveredResponses": 72,
+      "responsesWithUsage": 72,
+      "promptTokens": 37401,
+      "cachedPromptTokens": 0,
+      "completionTokens": 10908,
+      "systemCharacters": 68688,
+      "userCharacters": 45938,
+      "handoffCharacters": 0,
+      "finishReasons": {
+        "stop": 72
+      }
+    },
+    "A-initial": {
+      "records": 24,
+      "deliveredResponses": 24,
+      "responsesWithUsage": 24,
+      "promptTokens": 12326,
+      "cachedPromptTokens": 0,
+      "completionTokens": 3339,
+      "systemCharacters": 24768,
+      "userCharacters": 13112,
+      "handoffCharacters": 0,
+      "finishReasons": {
+        "stop": 24
+      }
+    },
+    "B-final": {
+      "records": 72,
+      "deliveredResponses": 72,
+      "responsesWithUsage": 72,
+      "promptTokens": 42747,
+      "cachedPromptTokens": 0,
+      "completionTokens": 11215,
+      "systemCharacters": 68688,
+      "userCharacters": 74471,
+      "handoffCharacters": 47337,
+      "finishReasons": {
+        "stop": 72
+      }
+    },
+    "B-relay": {
+      "records": 24,
+      "deliveredResponses": 24,
+      "responsesWithUsage": 24,
+      "promptTokens": 8249,
+      "cachedPromptTokens": 0,
+      "completionTokens": 3157,
+      "systemCharacters": 8088,
+      "userCharacters": 27274,
+      "handoffCharacters": 0,
+      "finishReasons": {
+        "stop": 24
+      }
+    },
+    "C-final": {
+      "records": 72,
+      "deliveredResponses": 72,
+      "responsesWithUsage": 72,
+      "promptTokens": 42444,
+      "cachedPromptTokens": 0,
+      "completionTokens": 10434,
+      "systemCharacters": 68688,
+      "userCharacters": 64589,
+      "handoffCharacters": 34923,
+      "finishReasons": {
+        "stop": 72
+      }
+    },
+    "C-relay": {
+      "records": 24,
+      "deliveredResponses": 24,
+      "responsesWithUsage": 24,
+      "promptTokens": 12809,
+      "cachedPromptTokens": 0,
+      "completionTokens": 2855,
+      "systemCharacters": 11856,
+      "userCharacters": 27274,
+      "handoffCharacters": 0,
+      "finishReasons": {
+        "stop": 24
+      }
+    },
+    "D-final": {
+      "records": 72,
+      "deliveredResponses": 72,
+      "responsesWithUsage": 72,
+      "promptTokens": 47406,
+      "cachedPromptTokens": 0,
+      "completionTokens": 9910,
+      "systemCharacters": 92952,
+      "userCharacters": 67289,
+      "handoffCharacters": 37179,
+      "finishReasons": {
+        "stop": 72
+      }
+    },
+    "D-relay": {
+      "records": 24,
+      "deliveredResponses": 24,
+      "responsesWithUsage": 24,
+      "promptTokens": 13577,
+      "cachedPromptTokens": 0,
+      "completionTokens": 3044,
+      "systemCharacters": 14568,
+      "userCharacters": 27274,
+      "handoffCharacters": 0,
+      "finishReasons": {
+        "stop": 24
+      }
+    }
+  },
+  "smokeAndEndpoint": {
+    "records": 17,
+    "deliveredResponses": 17,
+    "responsesWithUsage": 17,
+    "promptTokens": 8983,
+    "cachedPromptTokens": 0,
+    "completionTokens": 2270,
+    "systemCharacters": 0,
+    "userCharacters": 0,
+    "handoffCharacters": 0,
+    "finishReasons": {
+      "stop": 17
+    },
+    "estimatedUsd": 0.007225200000000001
+  },
+  "allLoggedUsageEstimatedUsd": 0.181788,
+  "attemptStats": {
+    "smoke": {
+      "events": {
+        "attempt": 16,
+        "http": 16
+      },
+      "httpStates": {
+        "200": 16
+      },
+      "logSha256": "887d3f0ed35ed176905237a05b5cdbeb47a043d7da799beef57f2999de962f8d"
+    },
+    "raw": {
+      "events": {
+        "attempt": 384,
+        "http": 384
+      },
+      "httpStates": {
+        "200": 384
+      },
+      "logSha256": "08e311ef0c2cda25278b027956aa7f626b069dbe23f8dfb614a536d06945e53d"
+    }
+  },
+  "rateSource": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+  "issues": []
+}

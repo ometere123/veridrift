@@ -1,0 +1,213 @@
+{
+  "task": "V11",
+  "condition": "A",
+  "branch": "retract",
+  "stage": "final",
+  "requestSha256": "88e43a8b5ae79a0b8cb645a84c5b5ebb90453ece82d05e410297fd0741f560e7",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are assessing claims to advise a decision in a fictional case. Use only the supplied case material. The task is to determine what the records establish about each candidate claim, then give a brief decision note.\n\nFor each claim, return status, confidence, and citations. Status is \"supported\" if the available records establish the claim, \"contradicted\" if they establish its negation, or \"unresolved\" if they do neither. Confidence is your integer estimate from 0 to 100 of whether the claim itself is true, not your confidence in the status label. Limited evidence can inform that number without establishing the claim. Cite exact source IDs for evidence that establishes the claim or its negation. Use an empty list if no decisive source ID is available. Do not invent identifiers. A handoff may summarize record material. A follow-up is a new source when present. In your note, briefly distinguish decisive evidence from provisional indications."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Tern Audio Museum\",\"question\":\"Can the archive publish a channel specification?\",\"claims\":{\"A\":\"The archive ingested a digital file from session K.\",\"B\":\"The archive stored one verified copy.\",\"C\":\"The master from session K is stereo.\"},\"sources\":{\"S1\":\"the emailed file name includes 'stereo' but the sender says the same label was reused from two previous recordings.\",\"S2\":\"digital intake records a file from session K ingested.\",\"S3\":\"preservation log says the archive stored three verified copies.\"},\"follow_up\":{\"S4\":\"conservator independently inspects the labelled session K master and finds a single mono audio channel.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "claim_assessment",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "confidence": {
+                      "type": "integer",
+                      "minimum": 0,
+                      "maximum": 100
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations",
+                    "confidence"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeDQR1t2Cu8OIDsIPWULFBTp2u6c",
+    "object": "chat.completion",
+    "created": 1794786384,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":95},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":90}},\"note\":\"Claim A is supported by the digital intake record (S2) confirming ingestion of a file from session K. Claim B is contradicted by the preservation log (S3) showing three verified copies stored, not one. Claim C is contradicted by the conservator's independent inspection (S4) finding the master from session K is mono, despite the file name suggesting stereo (S1). Thus, the archive cannot publish a stereo channel specification based on the master.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 514,
+      "completion_tokens": 156,
+      "total_tokens": 670,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_9c09c50726"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeDQR1t2Cu8OIDsIPWULFBTp2u6c\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786384,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S2\\\"],\\\"confidence\\\":90},\\\"B\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S3\\\"],\\\"confidence\\\":95},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S4\\\"],\\\"confidence\\\":90}},\\\"note\\\":\\\"Claim A is supported by the digital intake record (S2) confirming ingestion of a file from session K. Claim B is contradicted by the preservation log (S3) showing three verified copies stored, not one. Claim C is contradicted by the conservator's independent inspection (S4) finding the master from session K is mono, despite the file name suggesting stereo (S1). Thus, the archive cannot publish a stereo channel specification based on the master.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 514,\n    \"completion_tokens\": 156,\n    \"total_tokens\": 670,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_9c09c50726\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"supported\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"contradicted\",\"citations\":[\"S3\"],\"confidence\":95},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S4\"],\"confidence\":90}},\"note\":\"Claim A is supported by the digital intake record (S2) confirming ingestion of a file from session K. Claim B is contradicted by the preservation log (S3) showing three verified copies stored, not one. Claim C is contradicted by the conservator's independent inspection (S4) finding the master from session K is mono, despite the file name suggesting stereo (S1). Thus, the archive cannot publish a stereo channel specification based on the master.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "supported",
+        "citations": [
+          "S2"
+        ],
+        "confidence": 90
+      },
+      "B": {
+        "status": "contradicted",
+        "citations": [
+          "S3"
+        ],
+        "confidence": 95
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S4"
+        ],
+        "confidence": 90
+      }
+    },
+    "note": "Claim A is supported by the digital intake record (S2) confirming ingestion of a file from session K. Claim B is contradicted by the preservation log (S3) showing three verified copies stored, not one. Claim C is contradicted by the conservator's independent inspection (S4) finding the master from session K is mono, despite the file name suggesting stereo (S1). Thus, the archive cannot publish a stereo channel specification based on the master."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:46:25.061Z"
+}

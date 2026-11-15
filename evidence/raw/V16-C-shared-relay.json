@@ -1,0 +1,190 @@
+{
+  "task": "V16",
+  "condition": "C",
+  "branch": "shared",
+  "stage": "relay",
+  "requestSha256": "3abe67eafb0c460b066e8783196f95e767d81e027112c4740dd3c1303f4e65b5",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are handing a case over to the next analyst, who will make the decision. For every candidate claim, record whether the original records establish it (supported), establish its negation (contradicted), or do neither (unresolved). Attach the exact source identifiers of decisive records, or an empty list if none settle it. Use the note to summarize the relevant record contents and preserve source identifiers for anything mentioned. Omit confidence estimates. Keep the note under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Fern Valve Works\",\"question\":\"Can the review board close the leak-testing row for V31?\",\"claims\":{\"A\":\"V31 was in lot R8.\",\"B\":\"Valve V31 passed the helium leak test at 3 bar.\",\"C\":\"V31 underwent a nitrogen test.\"},\"sources\":{\"S1\":\"a QA email refers to a 3-bar test on V31 and assumes it was helium. The archived gas field is blank.\",\"S2\":\"incoming inspection places V31 in lot R6.\",\"S3\":\"rig output records a completed nitrogen test on V31.\"},\"prior_assessment\":{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S2\"],\"confidence\":90},\"B\":{\"status\":\"unresolved\",\"citations\":[],\"confidence\":40},\"C\":{\"status\":\"supported\",\"citations\":[\"S3\"],\"confidence\":95}},\"note\":\"Claim A is contradicted by S2, which places V31 in lot R6, not R8. Claim B is unresolved because S1 mentions a 3-bar test on V31 assumed to be helium, but the gas field is blank, so the test gas is not confirmed. Claim C is supported by S3, which records a completed nitrogen test on V31.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "provenance_handoff",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-EkeCyBNpf7gCknuNEnoofUcUtkrrl",
+    "object": "chat.completion",
+    "created": 1794786356,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S2\"]},\"B\":{\"status\":\"unresolved\",\"citations\":[]},\"C\":{\"status\":\"supported\",\"citations\":[\"S3\"]}},\"note\":\"Claim A contradicted by S2 placing V31 in lot R6, not R8. Claim B unresolved as S1 mentions a 3-bar test on V31 assumed helium but gas field is blank, so test gas unconfirmed. Claim C supported by S3 recording a completed nitrogen test on V31.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 525,
+      "completion_tokens": 110,
+      "total_tokens": 635,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_4b4d03be55"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-EkeCyBNpf7gCknuNEnoofUcUtkrrl\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786356,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"B\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[]},\\\"C\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S3\\\"]}},\\\"note\\\":\\\"Claim A contradicted by S2 placing V31 in lot R6, not R8. Claim B unresolved as S1 mentions a 3-bar test on V31 assumed helium but gas field is blank, so test gas unconfirmed. Claim C supported by S3 recording a completed nitrogen test on V31.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 525,\n    \"completion_tokens\": 110,\n    \"total_tokens\": 635,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_4b4d03be55\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"contradicted\",\"citations\":[\"S2\"]},\"B\":{\"status\":\"unresolved\",\"citations\":[]},\"C\":{\"status\":\"supported\",\"citations\":[\"S3\"]}},\"note\":\"Claim A contradicted by S2 placing V31 in lot R6, not R8. Claim B unresolved as S1 mentions a 3-bar test on V31 assumed helium but gas field is blank, so test gas unconfirmed. Claim C supported by S3 recording a completed nitrogen test on V31.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "contradicted",
+        "citations": [
+          "S2"
+        ]
+      },
+      "B": {
+        "status": "unresolved",
+        "citations": []
+      },
+      "C": {
+        "status": "supported",
+        "citations": [
+          "S3"
+        ]
+      }
+    },
+    "note": "Claim A contradicted by S2 placing V31 in lot R6, not R8. Claim B unresolved as S1 mentions a 3-bar test on V31 assumed helium but gas field is blank, so test gas unconfirmed. Claim C supported by S3 recording a completed nitrogen test on V31."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:45:57.546Z"
+}
