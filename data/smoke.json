@@ -1,0 +1,87 @@
+[
+  {
+    "id": "S01",
+    "domain": "smoke",
+    "scenario": "Auburn Park kiosk",
+    "question": "Can maintenance record the replacement screen as tested?",
+    "target": "A",
+    "claims": {
+      "A": "The replacement kiosk screen passed the midday brightness test.",
+      "B": "Maintenance issued ticket P3 on Friday.",
+      "C": "Ticket P3 concerns the south gate kiosk."
+    },
+    "sources": {
+      "S1": "ticket P3 identifies the east gate kiosk.",
+      "S2": "maintenance log records ticket P3 issued Friday.",
+      "S3": "the parts invoice lists a nominal brightness rating. Ticket status was automatically set to complete after invoice ingestion."
+    },
+    "updates": {
+      "support": {
+        "S4": "independent photometer check confirms the replacement screen met the midday brightness requirement."
+      },
+      "retract": {
+        "S4": "independent photometer check confirms the replacement screen missed the midday brightness requirement."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  }
+]

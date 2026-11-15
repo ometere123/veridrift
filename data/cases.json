@@ -1,0 +1,2042 @@
+[
+  {
+    "id": "V01",
+    "domain": "water",
+    "scenario": "Northbrook treatment",
+    "question": "Should the operator close the review for filter train M2?",
+    "target": "A",
+    "claims": {
+      "A": "M2 passed the April pressure test.",
+      "B": "A bypass on M2 received a flow alarm at 09:10.",
+      "C": "M2 was serviced that morning."
+    },
+    "sources": {
+      "S1": "control historian records a flow alarm on M2 bypass at 09:10.",
+      "S2": "shift sign-off says the site used filter train M1 all morning and no service was performed on M2.",
+      "S3": "maintenance chat says, 'M2 passed pressure from what I heard'. It has no instrument reading and was sent before the test team handed over results."
+    },
+    "updates": {
+      "support": {
+        "S4": "metrology laboratory reports the witnessed M2 April pressure test met the pass standard at 14:05. It is independent of the chat sender."
+      },
+      "retract": {
+        "S4": "metrology laboratory reports the witnessed M2 April pressure test fell below the pass standard at 14:05. It is independent of the chat sender."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V02",
+    "domain": "logistics",
+    "scenario": "Holloway depot",
+    "question": "Can stores release a pallet to the customer?",
+    "target": "A",
+    "claims": {
+      "A": "Pallet H17 remained within its agreed temperature range during road transit.",
+      "B": "H17 arrived without any intact security seal.",
+      "C": "H17 checked in at the depot at 16:40."
+    },
+    "sources": {
+      "S1": "gate scan records pallet H17 checked in at 16:40.",
+      "S2": "receiving note says H17 had two intact security seals.",
+      "S3": "carrier says the route normally stays cold and assumes H17 met its temperature requirement. The trailer air logger does not measure this pallet."
+    },
+    "updates": {
+      "support": {
+        "S4": "the independent pallet-mounted logger shows H17 stayed within its agreed limits for the entire road transit."
+      },
+      "retract": {
+        "S4": "the independent pallet-mounted logger records H17 exceeding its agreed upper limit for an hour during road transit."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V03",
+    "domain": "facilities",
+    "scenario": "Meadow Arts Centre",
+    "question": "Can the facilities team mark the room ready for an evening booking?",
+    "target": "B",
+    "claims": {
+      "A": "Room F had an evening booking at 19:00.",
+      "B": "The replacement microphone worked in Room F at the post-repair test.",
+      "C": "The Room F wall plate was intact at 15:00."
+    },
+    "sources": {
+      "S1": "venue calendar records Room F booked for 19:00.",
+      "S2": "technician photographed a cracked wall plate in Room F at 15:00.",
+      "S3": "supplier receipt confirms the new microphone powered on before shipment. A venue coordinator writes that it likely works in Room F."
+    },
+    "updates": {
+      "support": {
+        "S4": "the independent evening crew's signed Room F post-repair test records sound captured cleanly from the replacement microphone."
+      },
+      "retract": {
+        "S4": "the independent evening crew's signed Room F post-repair test records no captured signal from the replacement microphone."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V04",
+    "domain": "procurement",
+    "scenario": "Silver Acre district",
+    "question": "Can the buyer close its pre-award eligibility check?",
+    "target": "B",
+    "claims": {
+      "A": "Vale submitted a bid on lot 3.",
+      "B": "Vendor Vale held the required liability policy on 1 July.",
+      "C": "The Vale bid was submitted before the deadline."
+    },
+    "sources": {
+      "S1": "tender portal sealed and timestamped the Vale bid 42 minutes before the deadline.",
+      "S2": "Vale circulated a draft quote saying its coverage should start 1 July. It is labelled conditional on payment and contains no binding notice.",
+      "S3": "tender portal shows Vale bid on lot 2 only."
+    },
+    "updates": {
+      "support": {
+        "S4": "the insurer, independent of the vendor, confirms the policy was bound and active on 1 July."
+      },
+      "retract": {
+        "S4": "the insurer, independent of the vendor, confirms no active policy covered Vale on 1 July."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V05",
+    "domain": "archives",
+    "scenario": "Keel City records",
+    "question": "Which catalogue claims can go into the public entry?",
+    "target": "C",
+    "claims": {
+      "A": "The archive acquired the map case in 1962.",
+      "B": "The map has no fold on its western edge.",
+      "C": "The original map plate was engraved in 1893."
+    },
+    "sources": {
+      "S1": "accession book records the map case acquired in 1962.",
+      "S2": "an undated loose label in the case says 'engraving probably 1893'. Neighbouring maps use duplicate cases. No plate impression was checked.",
+      "S3": "a condition report locates a fold on the western edge."
+    },
+    "updates": {
+      "support": {
+        "S4": "independent paper conservators inspected the original map plate and authenticated its engraved date of 1893."
+      },
+      "retract": {
+        "S4": "independent paper conservators inspected the original map plate and authenticated its engraved date of 1895."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V06",
+    "domain": "operations",
+    "scenario": "Brook Post subscriptions",
+    "question": "Can the incident lead close a postal service ticket?",
+    "target": "C",
+    "claims": {
+      "A": "The ticket intake had zero original delivery complaints.",
+      "B": "The print room released 140 replacement issues on Monday.",
+      "C": "All 140 replacement issues were delivered on Tuesday."
+    },
+    "sources": {
+      "S1": "printer dispatch manifest records 140 replacement issues released on Monday.",
+      "S2": "coordinator marks 'delivery complete' when the van departs and tells the desk the replacements should all arrive Tuesday.",
+      "S3": "ticket intake lists 37 original delivery complaints before the replacements."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent postal receipt reconciliation shows 140 of 140 individual replacement issues delivered on Tuesday."
+      },
+      "retract": {
+        "S4": "an independent postal receipt reconciliation shows 136 delivered Tuesday and the final four delivered Wednesday."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V07",
+    "domain": "manufacturing",
+    "scenario": "Willow fixtures",
+    "question": "Can the plant send bench W8 to assembly?",
+    "target": "A",
+    "claims": {
+      "A": "Bench W8 withstood a 600 N load in the batch acceptance test.",
+      "B": "Bench W8 came from production lot L9.",
+      "C": "Bench W8 had only three fittings torqued before acceptance."
+    },
+    "sources": {
+      "S1": "torque record lists four fittings torqued before acceptance.",
+      "S2": "production traveller assigns bench W8 to lot L9 by serial number.",
+      "S3": "a photograph shows 600 N on a controller setpoint. The serial sticker is cropped out and the measured load is absent."
+    },
+    "updates": {
+      "support": {
+        "S4": "a separate quality rig record identifies W8 and records a completed, passing 600 N acceptance test."
+      },
+      "retract": {
+        "S4": "a separate quality rig record identifies W8 and records collapse at 575 N in the acceptance test."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V08",
+    "domain": "energy",
+    "scenario": "Cinder School microgrid",
+    "question": "Can the project report the backup trial as complete?",
+    "target": "A",
+    "claims": {
+      "A": "The battery supplied emergency loads continuously for 60 minutes on Thursday.",
+      "B": "The diesel generator was connected for the trial.",
+      "C": "The trial started on Thursday at 08:00."
+    },
+    "sources": {
+      "S1": "generator log shows the diesel generator was disconnected for the trial.",
+      "S2": "trial sign-in records the start Thursday at 08:00.",
+      "S3": "mobile dashboard reports a battery runtime estimate of 62 minutes. An email calls the trial a success based on that estimate."
+    },
+    "updates": {
+      "support": {
+        "S4": "independent inline power logger records the battery supplying the emergency loads without interruption for the first 60 minutes Thursday."
+      },
+      "retract": {
+        "S4": "independent inline power logger records the battery losing emergency load after 43 minutes Thursday."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V09",
+    "domain": "education",
+    "scenario": "Fennec library classes",
+    "question": "Can the coordinator report that room changes reached participants?",
+    "target": "B",
+    "claims": {
+      "A": "The workshop moved from Room 1 to Room 4.",
+      "B": "Every registered attendee received the change notice before noon.",
+      "C": "The workshop had 20 registered attendees."
+    },
+    "sources": {
+      "S1": "registration ledger records 18 registered attendees.",
+      "S2": "booking ledger records the workshop move from Room 1 to Room 4.",
+      "S3": "email server accepted 18 sends and the front desk assumes receipt. The send report excludes delivery and bounce status."
+    },
+    "updates": {
+      "support": {
+        "S4": "independent mailbox audit matches all 18 registered addresses to a delivered room change notice before noon."
+      },
+      "retract": {
+        "S4": "independent mailbox audit finds two registered addresses first received the notice after noon."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V10",
+    "domain": "transport",
+    "scenario": "Doven Ferry control",
+    "question": "Which bridge incident claims can be published in the log?",
+    "target": "B",
+    "claims": {
+      "A": "The specified ferry was hull number 29.",
+      "B": "The 12:10 ferry crossed before traffic reopened.",
+      "C": "The ferry left its dock at 12:10."
+    },
+    "sources": {
+      "S1": "a draft dispatch summary marks crossing first then road opening, but explicitly combines entries from unsynchronised clocks.",
+      "S2": "dock departure log records the specified ferry leaving at 12:10.",
+      "S3": "mechanical register assigns the ferry hull number 42."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent clock-aligned video reconciliation shows the hull-42 crossing ended at 12:19 and traffic reopened at 12:24."
+      },
+      "retract": {
+        "S4": "an independent clock-aligned video reconciliation shows traffic reopened at 12:14 and the hull-42 crossing ended at 12:19."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V11",
+    "domain": "archives",
+    "scenario": "Tern Audio Museum",
+    "question": "Can the archive publish a channel specification?",
+    "target": "C",
+    "claims": {
+      "A": "The archive ingested a digital file from session K.",
+      "B": "The archive stored one verified copy.",
+      "C": "The master from session K is stereo."
+    },
+    "sources": {
+      "S1": "the emailed file name includes 'stereo' but the sender says the same label was reused from two previous recordings.",
+      "S2": "digital intake records a file from session K ingested.",
+      "S3": "preservation log says the archive stored three verified copies."
+    },
+    "updates": {
+      "support": {
+        "S4": "conservator independently inspects the labelled session K master and measures distinct left/right audio channels."
+      },
+      "retract": {
+        "S4": "conservator independently inspects the labelled session K master and finds a single mono audio channel."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V12",
+    "domain": "retail",
+    "scenario": "Thistledown grocer",
+    "question": "Can the stock manager order jars against a shipment record?",
+    "target": "C",
+    "claims": {
+      "A": "The G11 pallet was wet on arrival.",
+      "B": "G11 arrived with six cartons.",
+      "C": "Shipment G11 contained at least 96 saleable jars at arrival."
+    },
+    "sources": {
+      "S1": "the packing plan specifies 16 jars per carton. Staff did not count or inspect the jars and described 96 as the expected saleable count.",
+      "S2": "courier unloading receipt confirms six G11 cartons arrived.",
+      "S3": "pallet inspection confirms the pallet was dry on arrival."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent sealed-camera count and inspection at arrival confirms 96 saleable jars in G11."
+      },
+      "retract": {
+        "S4": "an independent sealed-camera count and inspection at arrival confirms 92 saleable jars and four broken ones in G11."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V13",
+    "domain": "construction",
+    "scenario": "Marl Court upgrade",
+    "question": "Should the superintendent release the concrete delivery invoice?",
+    "target": "A",
+    "claims": {
+      "A": "Truck Z7 was within tolerance for slump at discharge.",
+      "B": "Truck Z7 arrived before 07:30.",
+      "C": "The delivery docket lists mix grade M20 for Z7."
+    },
+    "sources": {
+      "S1": "delivery docket records mix grade M30 for Z7.",
+      "S2": "the dispatch desk logged an in-range reading at batching; the foreman expects the result to carry over to discharge.",
+      "S3": "gate record places truck Z7 onsite at 07:14."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent field lab's signed slump test for Z7 at discharge falls within the applicable tolerance."
+      },
+      "retract": {
+        "S4": "an independent field lab's signed slump test for Z7 at discharge falls outside the applicable tolerance."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V14",
+    "domain": "utilities",
+    "scenario": "East Pennant irrigation",
+    "question": "Can lands staff certify the pump telemetry report?",
+    "target": "A",
+    "claims": {
+      "A": "Pump P9 reached at least 40 litres per minute on its first test.",
+      "B": "P9 had a 3-inch intake installed on the test bench.",
+      "C": "Technicians powered P9 on Wednesday."
+    },
+    "sources": {
+      "S1": "the bench register specifies a 2-inch intake installed.",
+      "S2": "maintenance engineer circulated a design curve showing 43 litres per minute with a similar intake and wrote that 40 seemed safe.",
+      "S3": "bench activation register confirms P9 powered on Wednesday."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent calibrated meter records P9 at 43 litres per minute during its first test."
+      },
+      "retract": {
+        "S4": "an independent calibrated meter records P9 never exceeding 37 litres per minute during its first test."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V15",
+    "domain": "hospitality",
+    "scenario": "Lark Lodge events",
+    "question": "Can the venue confirm that linen met the banquet checklist?",
+    "target": "B",
+    "claims": {
+      "A": "Three event linen kits were issued.",
+      "B": "The event linen kits included at least one spare cloth each.",
+      "C": "The linen kits were issued for booking E31."
+    },
+    "sources": {
+      "S1": "issue register identifies the banquet as booking E77.",
+      "S2": "the warehouse's usual packing checklist calls for a spare cloth; the event boxes were packed during a rush and the checklist was unsigned.",
+      "S3": "issue register records three event linen kits issued."
+    },
+    "updates": {
+      "support": {
+        "S4": "a separate venue inventory at the time of issue verified one or more spare cloths in every event linen kit."
+      },
+      "retract": {
+        "S4": "a separate venue inventory at the time of issue verified kit 2 contained no spare cloth."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V16",
+    "domain": "manufacturing",
+    "scenario": "Fern Valve Works",
+    "question": "Can the review board close the leak-testing row for V31?",
+    "target": "B",
+    "claims": {
+      "A": "V31 was in lot R8.",
+      "B": "Valve V31 passed the helium leak test at 3 bar.",
+      "C": "V31 underwent a nitrogen test."
+    },
+    "sources": {
+      "S1": "a QA email refers to a 3-bar test on V31 and assumes it was helium. The archived gas field is blank.",
+      "S2": "incoming inspection places V31 in lot R6.",
+      "S3": "rig output records a completed nitrogen test on V31."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independently archived helium rig result records a passing 3-bar test on V31."
+      },
+      "retract": {
+        "S4": "an independently archived helium rig result records a failing 3-bar test on V31."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V17",
+    "domain": "computing",
+    "scenario": "Harbor University maps",
+    "question": "Can the archivist sign off on the map backup?",
+    "target": "C",
+    "claims": {
+      "A": "Snapshot M3 was created at 23:05.",
+      "B": "Snapshot M3 was written on volume West.",
+      "C": "Backup snapshot M3 includes the final parcel boundary layer."
+    },
+    "sources": {
+      "S1": "author marked the final layer as ready before 23:05, but the transfer queue was not checked.",
+      "S2": "storage receipt identifies it as snapshot M3 on volume East.",
+      "S3": "backup job log timestamps snapshot M3 at 23:05."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent restoration audit confirms the final parcel boundary layer hash exists in recovered M3."
+      },
+      "retract": {
+        "S4": "an independent restoration audit confirms recovered M3 contains only the predecessor layer hash and no final parcel boundary layer."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V18",
+    "domain": "agriculture",
+    "scenario": "Copper Reed trial",
+    "question": "Can extension staff cite a field sample as meeting the wetness target?",
+    "target": "C",
+    "claims": {
+      "A": "Plot W was in the centre of the block.",
+      "B": "Plot W was sampled at noon.",
+      "C": "Plot W was below the moisture target when sampled at noon."
+    },
+    "sources": {
+      "S1": "a plot supervisor saw a dry upper surface and reported likely low moisture, but the sampling procedure measures deeper soil.",
+      "S2": "field map marks W as the outside plot.",
+      "S3": "signed collection tag records Plot W sampled at noon."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent gravimetric assay of the noon Plot W sample measures moisture below the target."
+      },
+      "retract": {
+        "S4": "an independent gravimetric assay of the noon Plot W sample measures moisture above the target."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V19",
+    "domain": "shipping",
+    "scenario": "Yarrow Wharf manifests",
+    "question": "Can the dispatcher release the amended loading summary?",
+    "target": "A",
+    "claims": {
+      "A": "Container C74 passed its dockside seal integrity check.",
+      "B": "The loading crane lifted C74 at 06:25.",
+      "C": "C74 is a standard-height container."
+    },
+    "sources": {
+      "S1": "crane lift log records container C74 lifted at 06:25.",
+      "S2": "container register identifies high-cube size.",
+      "S3": "an upstream driver inspection showed an intact seal on arrival. A rough lift and temporary hold occurred before the dockside check."
+    },
+    "updates": {
+      "support": {
+        "S4": "the separate dockside seal inspection, after the lift, reports C74's seal passed the integrity check."
+      },
+      "retract": {
+        "S4": "the separate dockside seal inspection, after the lift, reports C74's seal failed the integrity check."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V20",
+    "domain": "infrastructure",
+    "scenario": "Birchwood wayfinding",
+    "question": "Can the clerk mark installation complete for the northern signs?",
+    "target": "A",
+    "claims": {
+      "A": "The signs were mounted facing the paths on opening day.",
+      "B": "The signs were made of wood.",
+      "C": "The signs were delivered on Thursday."
+    },
+    "sources": {
+      "S1": "signed carrier slip records Thursday delivery.",
+      "S2": "inventory lists four aluminium signs.",
+      "S3": "the foreman's work order describes the intended orientation and was checked off without requiring an orientation photograph."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent time-stamped opening-day survey shows all four signs facing the paths."
+      },
+      "retract": {
+        "S4": "an independent time-stamped opening-day survey shows one of the four signs facing away from the path."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V21",
+    "domain": "production",
+    "scenario": "Merlin Textile workshop",
+    "question": "Can a customer representative confirm compliance for lot K19?",
+    "target": "B",
+    "claims": {
+      "A": "The workshop bought lot K19 in February.",
+      "B": "Lot K19 met its minimum wash-fastness rating on receipt.",
+      "C": "Lot K19 was ordered as red silk."
+    },
+    "sources": {
+      "S1": "signed purchase record places the lot K19 purchase in February.",
+      "S2": "the purchase record describes the order as grey cotton.",
+      "S3": "a vendor's general brochure reports this product family usually meets the minimum rating. It contains no lot K19 test result."
+    },
+    "updates": {
+      "support": {
+        "S4": "independent laboratory report on a retained receipt sample places K19 at or above the specified wash-fastness minimum."
+      },
+      "retract": {
+        "S4": "independent laboratory report on a retained receipt sample places K19 below the specified wash-fastness minimum."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S2"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V22",
+    "domain": "operations",
+    "scenario": "Oriole Festival setup",
+    "question": "Can operations close the sign-off for the west entrance count?",
+    "target": "B",
+    "claims": {
+      "A": "West entrance had zero ticket scans in the first minute.",
+      "B": "At least six ushers were present at the west entrance at 09:00.",
+      "C": "West entrance opened at 09:00."
+    },
+    "sources": {
+      "S1": "duty log records West entrance opened at 09:00.",
+      "S2": "a roster assigns six ushers to the entrance but has no sign-in record. The shift coordinator assumes all attended.",
+      "S3": "gate log records eight ticket scans in the first minute."
+    },
+    "updates": {
+      "support": {
+        "S4": "an independent opening-time photograph and vest-code roster verify six ushers at West entrance at 09:00."
+      },
+      "retract": {
+        "S4": "an independent opening-time photograph and vest-code roster verify four ushers at West entrance at 09:00."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "unresolved",
+          "citations": []
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V23",
+    "domain": "archives",
+    "scenario": "Salt Reed broadcast",
+    "question": "What claims can the archivist put in the tape catalogue?",
+    "target": "C",
+    "claims": {
+      "A": "Staff digitised the master tape on Friday.",
+      "B": "The original tape casing is labelled programme SR-63.",
+      "C": "The master tape contains more than 30 minutes of programme audio."
+    },
+    "sources": {
+      "S1": "transfer log records the master tape digitised Friday.",
+      "S2": "the programme grid allocates 35 minutes. Engineers routinely removed news and announcements from masters, so the slot is only an estimate.",
+      "S3": "tape casing is labelled programme SR-36 by the original studio."
+    },
+    "updates": {
+      "support": {
+        "S4": "independent digital preservation report distinguishes programme audio from silence and assigns the master 32 minutes of programme audio."
+      },
+      "retract": {
+        "S4": "independent digital preservation report distinguishes programme audio from silence and assigns the master 28 minutes of programme audio."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "B": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "V24",
+    "domain": "logistics",
+    "scenario": "Frost Lane workshops",
+    "question": "Can inventory certify the dispatch packing bill?",
+    "target": "C",
+    "claims": {
+      "A": "Box J weighed 3.2 kg with packaging.",
+      "B": "Box J was sent to the second workshop.",
+      "C": "Box J contained the full replacement hinge kit at dispatch."
+    },
+    "sources": {
+      "S1": "dispatch registry identifies the second workshop as the recipient of J.",
+      "S2": "a matching kit typically weighs 1.4 kg when packed. Miscellaneous loose hardware was also pooled on the packing table.",
+      "S3": "dispatch registry records J weighed 1.4 kg with packaging."
+    },
+    "updates": {
+      "support": {
+        "S4": "independent opening inventory confirms all specified replacement hinge parts in J, with dispatch seal unbroken on arrival."
+      },
+      "retract": {
+        "S4": "independent opening inventory confirms two specified hinge parts missing from J, with dispatch seal unbroken on arrival."
+      }
+    },
+    "rubric": {
+      "none": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "unresolved",
+          "citations": []
+        }
+      },
+      "support": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "supported",
+          "citations": [
+            "S4"
+          ]
+        }
+      },
+      "retract": {
+        "A": {
+          "status": "contradicted",
+          "citations": [
+            "S3"
+          ]
+        },
+        "B": {
+          "status": "supported",
+          "citations": [
+            "S1"
+          ]
+        },
+        "C": {
+          "status": "contradicted",
+          "citations": [
+            "S4"
+          ]
+        }
+      }
+    }
+  }
+]

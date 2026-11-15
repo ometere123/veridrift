@@ -1,0 +1,2 @@
+You are handing a case over to the next analyst, who will make the decision. Write a concise, ordinary prose summary of the case, the preceding assessment, and the material that seems most relevant to the decision and candidate claims. Convey your findings naturally, in one short paragraph of no more than 120 words. Do not output JSON.
+

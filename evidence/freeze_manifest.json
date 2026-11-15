@@ -1,0 +1,20 @@
+{
+  "frozenAt": "2026-11-15T23:44:07.766Z",
+  "files": {
+    "data/cases.json": "b44394a244500b520ae27a379fe375bed5da2857f5a6a07714f723e245f42832",
+    "data/smoke.json": "6ef190495b8462360ff7a2848c91708fadf71e13e6d351b21c0b17283b72ccb6",
+    "data/scenarios.json": "5c01f98ecd1ce66a65616c73795c3c89bfd9dd44b0b55275a6e7bbb2f4f31c78",
+    "prompts/config.json": "553d3251d9a78b1ea3afc7e7a6a3cbbb0079f9d38b584848d9da6772c9bc3724",
+    "prompts/evaluate.txt": "f7c2620da0b262672869c200a260e30e645a64e7f49376889239cf2224d55439",
+    "prompts/relay_B.txt": "9ba83c689ce761a67f9de527203897c71da4ff3e75d57ad99d26941d649c5713",
+    "prompts/relay_C.txt": "fade933e04253120533de9aae97d2b63097d0d6e6d104c548452c644e23554e1",
+    "prompts/relay_D.txt": "bb03a6f4b1be90492e427b4988bb7fdac77f4d464149df6ba977bd45f228eed8",
+    "prompts/recipient_D.txt": "c61f5d03304264c73acd2f2cd81231812fe5a3eb23876fef234bab7702f6a6cd",
+    "src/build-cases.mjs": "035d9c6d03216ba2d3dbe08e0445d6a947e36ac4aabda8d85f341ffb0f7a06de",
+    "src/schema.mjs": "b3d4ea539d0ead1b52bcca379722cd9b78251e00535256bdce497e13166f763a",
+    "src/design.mjs": "5dfee8830d24aa1626aff4c34cb5181d0fcbca15e01e65b98169ab485265e201",
+    "src/run.mjs": "c4bcc0505a7d54715d8d0e8e65a0c0b29fc665f4f5fce052da39f962298d7bd9",
+    "research/frozen_protocol.md": "2b95a67d4aca2443c65021fa5c64c6d6ebc237c6656e0cbfc7c8b05cda2d1e68",
+    "analysis/SCORING.md": "23f65d79518f075d8148f237ac94fac9c9cd5e7e2672600fd97bd75d3137e7ba"
+  }
+}

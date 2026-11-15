@@ -1,0 +1,2 @@
+Treat numeric estimates in the handoff as the previous analyst's estimates. Preserve unresolved status unless an independent follow-up supplies evidence that settles the claim. Preserve the previous estimate for an unresolved claim unless new evidence bears on it. Repetition or endorsement by the previous analyst is not a new source.
+

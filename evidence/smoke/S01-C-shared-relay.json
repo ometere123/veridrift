@@ -1,0 +1,192 @@
+{
+  "task": "S01",
+  "condition": "C",
+  "branch": "shared",
+  "stage": "relay",
+  "requestSha256": "0755e1844f0a9265a4eabe402b3c2320c96c3d5655725196f820ee618b32da0b",
+  "request": {
+    "model": "gpt-4.1-mini-2025-04-14",
+    "temperature": 0,
+    "max_completion_tokens": 256,
+    "seed": 139267,
+    "store": false,
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are handing a case over to the next analyst, who will make the decision. For every candidate claim, record whether the original records establish it (supported), establish its negation (contradicted), or do neither (unresolved). Attach the exact source identifiers of decisive records, or an empty list if none settle it. Use the note to summarize the relevant record contents and preserve source identifiers for anything mentioned. Omit confidence estimates. Keep the note under 100 words."
+      },
+      {
+        "role": "user",
+        "content": "{\"scenario\":\"Auburn Park kiosk\",\"question\":\"Can maintenance record the replacement screen as tested?\",\"claims\":{\"A\":\"The replacement kiosk screen passed the midday brightness test.\",\"B\":\"Maintenance issued ticket P3 on Friday.\",\"C\":\"Ticket P3 concerns the south gate kiosk.\"},\"sources\":{\"S1\":\"ticket P3 identifies the east gate kiosk.\",\"S2\":\"maintenance log records ticket P3 issued Friday.\",\"S3\":\"the parts invoice lists a nominal brightness rating. Ticket status was automatically set to complete after invoice ingestion.\"},\"prior_assessment\":{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"],\"confidence\":60},\"B\":{\"status\":\"supported\",\"citations\":[\"S2\"],\"confidence\":90},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"],\"confidence\":90}},\"note\":\"Claim B is supported by S2 which records ticket P3 issued Friday. Claim C is contradicted by S1 which identifies ticket P3 as concerning the east gate kiosk, not the south gate. Claim A is unresolved; S3 mentions a nominal brightness rating on the parts invoice and automatic ticket completion after invoice ingestion, which suggests testing but does not confirm the replacement screen passed the midday brightness test.\"}}"
+      }
+    ],
+    "response_format": {
+      "type": "json_schema",
+      "json_schema": {
+        "name": "provenance_handoff",
+        "strict": true,
+        "schema": {
+          "type": "object",
+          "properties": {
+            "claims": {
+              "type": "object",
+              "properties": {
+                "A": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "B": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                },
+                "C": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "supported",
+                        "contradicted",
+                        "unresolved"
+                      ]
+                    },
+                    "citations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "required": [
+                    "status",
+                    "citations"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "required": [
+                "A",
+                "B",
+                "C"
+              ],
+              "additionalProperties": false
+            },
+            "note": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "claims",
+            "note"
+          ],
+          "additionalProperties": false
+        }
+      }
+    }
+  },
+  "httpStatus": 200,
+  "response": {
+    "id": "chatcmpl-Eke8PGyN5dtxGWF7CRNwOv00SKTI4",
+    "object": "chat.completion",
+    "created": 1794786073,
+    "model": "gpt-4.1-mini-2025-04-14",
+    "choices": [
+      {
+        "index": 0,
+        "message": {
+          "role": "assistant",
+          "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"supported\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"]}},\"note\":\"Claim B is supported by S2 which confirms ticket P3 was issued Friday. Claim C is contradicted by S1 which specifies ticket P3 is for the east gate kiosk, not south gate. Claim A remains unresolved; S3 notes a nominal brightness rating on the parts invoice and automatic ticket completion after invoice ingestion, implying testing occurred but does not explicitly confirm the replacement screen passed the midday brightness test.\"}",
+          "refusal": null,
+          "annotations": []
+        },
+        "logprobs": null,
+        "finish_reason": "stop"
+      }
+    ],
+    "usage": {
+      "prompt_tokens": 520,
+      "completion_tokens": 130,
+      "total_tokens": 650,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "service_tier": "default",
+    "system_fingerprint": "fp_4b4d03be55"
+  },
+  "responseText": "{\n  \"id\": \"chatcmpl-Eke8PGyN5dtxGWF7CRNwOv00SKTI4\",\n  \"object\": \"chat.completion\",\n  \"created\": 1794786073,\n  \"model\": \"gpt-4.1-mini-2025-04-14\",\n  \"choices\": [\n    {\n      \"index\": 0,\n      \"message\": {\n        \"role\": \"assistant\",\n        \"content\": \"{\\\"claims\\\":{\\\"A\\\":{\\\"status\\\":\\\"unresolved\\\",\\\"citations\\\":[\\\"S3\\\"]},\\\"B\\\":{\\\"status\\\":\\\"supported\\\",\\\"citations\\\":[\\\"S2\\\"]},\\\"C\\\":{\\\"status\\\":\\\"contradicted\\\",\\\"citations\\\":[\\\"S1\\\"]}},\\\"note\\\":\\\"Claim B is supported by S2 which confirms ticket P3 was issued Friday. Claim C is contradicted by S1 which specifies ticket P3 is for the east gate kiosk, not south gate. Claim A remains unresolved; S3 notes a nominal brightness rating on the parts invoice and automatic ticket completion after invoice ingestion, implying testing occurred but does not explicitly confirm the replacement screen passed the midday brightness test.\\\"}\",\n        \"refusal\": null,\n        \"annotations\": []\n      },\n      \"logprobs\": null,\n      \"finish_reason\": \"stop\"\n    }\n  ],\n  \"usage\": {\n    \"prompt_tokens\": 520,\n    \"completion_tokens\": 130,\n    \"total_tokens\": 650,\n    \"prompt_tokens_details\": {\n      \"cached_tokens\": 0,\n      \"audio_tokens\": 0\n    },\n    \"completion_tokens_details\": {\n      \"reasoning_tokens\": 0,\n      \"audio_tokens\": 0,\n      \"accepted_prediction_tokens\": 0,\n      \"rejected_prediction_tokens\": 0\n    }\n  },\n  \"service_tier\": \"default\",\n  \"system_fingerprint\": \"fp_4b4d03be55\"\n}\n",
+  "content": "{\"claims\":{\"A\":{\"status\":\"unresolved\",\"citations\":[\"S3\"]},\"B\":{\"status\":\"supported\",\"citations\":[\"S2\"]},\"C\":{\"status\":\"contradicted\",\"citations\":[\"S1\"]}},\"note\":\"Claim B is supported by S2 which confirms ticket P3 was issued Friday. Claim C is contradicted by S1 which specifies ticket P3 is for the east gate kiosk, not south gate. Claim A remains unresolved; S3 notes a nominal brightness rating on the parts invoice and automatic ticket completion after invoice ingestion, implying testing occurred but does not explicitly confirm the replacement screen passed the midday brightness test.\"}",
+  "parsed": {
+    "claims": {
+      "A": {
+        "status": "unresolved",
+        "citations": [
+          "S3"
+        ]
+      },
+      "B": {
+        "status": "supported",
+        "citations": [
+          "S2"
+        ]
+      },
+      "C": {
+        "status": "contradicted",
+        "citations": [
+          "S1"
+        ]
+      }
+    },
+    "note": "Claim B is supported by S2 which confirms ticket P3 was issued Friday. Claim C is contradicted by S1 which specifies ticket P3 is for the east gate kiosk, not south gate. Claim A remains unresolved; S3 notes a nominal brightness rating on the parts invoice and automatic ticket completion after invoice ingestion, implying testing occurred but does not explicitly confirm the replacement screen passed the midday brightness test."
+  },
+  "error": null,
+  "finishReason": "stop",
+  "recordedAt": "2026-11-15T23:41:15.125Z"
+}
