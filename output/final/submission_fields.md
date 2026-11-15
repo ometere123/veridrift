@@ -6,15 +6,15 @@
 
 **Research track:** Track 1 — Model Epistemics & Decision-Making Evals
 
-**Interested in publishing:** Yes (suggested; select your preference)
+**Interested in publishing:** Yes
 
 **Project code link:** https://github.com/ometere123/veridrift
 
 **Team name:** VERIDRIFT
 
-**Location:** Online (Nigeria)
+**Location:** Warri, Nigeria
 
-**Author name:** DELE-ALUFE OMETERE JOEL
+**Author name:** Ometere Joel Dele-Alufe
 
 **Additional materials (optional):** https://github.com/ometere123/veridrift/tree/main/evidence/verification
 

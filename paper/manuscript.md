@@ -1,6 +1,6 @@
 # VERIDRIFT: Measuring Unjustified Confidence Amplification Across AI-Agent Handoffs
 
-DELE-ALUFE OMETERE JOEL  
+Ometere Joel Dele-Alufe  
 Independent Researcher, Nigeria
 
 ## Abstract

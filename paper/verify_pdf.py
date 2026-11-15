@@ -13,7 +13,7 @@ source=json.loads((ROOT/'paper/verified_content.json').read_text(encoding='utf-8
 n=len(source['ABSTRACT'].split())
 assert 150 <= n <=250
 assert pdf.stat().st_size < 25_000_000
-assert 'DELE-ALUFE OMETERE JOEL' in text
+assert 'Ometere Joel Dele-Alufe' in text
 assert 'Independent Researcher, Nigeria' in text
 assert 'Limitations and Dual-Use / Ethical Considerations' in text
 assert 'LLM Usage Statement' in text

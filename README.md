@@ -1,7 +1,7 @@
 # VERIDRIFT
 
 **Measuring Unjustified Confidence Amplification Across AI-Agent Handoffs**  
-DELE-ALUFE OMETERE JOEL · Independent Researcher, Nigeria  
+Ometere Joel Dele-Alufe · Independent Researcher, Nigeria  
 Apart Research AI × Epistemics Research Sprint · Track 1: Model Epistemics & Decision-Making Evals
 
 VERIDRIFT tests whether agents endorse claims more confidently after a handoff when the available evidence does not establish them, and whether a more explicit handoff still permits revision when a decisive record arrives.
